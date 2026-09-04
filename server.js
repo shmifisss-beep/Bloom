@@ -1,0 +1,349 @@
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import { Telegraf, Markup } from 'telegraf';
+import { readMenu, updateItem, addItem, deleteItem, getCategories } from './db.js';
+
+// ─────────────────────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────────────────────
+const PORT = process.env.PORT || 3000;
+const BOT_TOKEN = process.env.BOT_TOKEN;
+const ADMIN_IDS = (process.env.ADMIN_CHAT_IDS || '')
+  .split(',')
+  .map(s => s.trim())
+  .filter(Boolean)
+  .map(Number);
+
+if (!BOT_TOKEN) {
+  console.error('❌ BOT_TOKEN is missing. Set it in your .env file or hosting environment variables.');
+  process.exit(1);
+}
+
+if (ADMIN_IDS.length === 0) {
+  console.warn('⚠️  ADMIN_CHAT_IDS is empty — nobody will be able to use admin commands yet.');
+  console.warn('    Message your bot, run /start, and check the reply for your chat ID.');
+}
+
+// ─────────────────────────────────────────────────────────────
+// REST API (used by the website to load the live menu)
+// ─────────────────────────────────────────────────────────────
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.get('/api/menu', (req, res) => {
+  res.json(readMenu());
+});
+
+app.get('/api/menu/categories', (req, res) => {
+  res.json(getCategories());
+});
+
+app.get('/health', (req, res) => res.send('ok'));
+
+app.listen(PORT, () => {
+  console.log(`✅ Menu API running on port ${PORT}`);
+});
+
+// ─────────────────────────────────────────────────────────────
+// TELEGRAM BOT
+// ─────────────────────────────────────────────────────────────
+const bot = new Telegraf(BOT_TOKEN);
+
+// In-memory conversation state per admin chat: what are we waiting for?
+const sessions = new Map();
+
+function isAdmin(ctx) {
+  return ADMIN_IDS.includes(ctx.chat.id);
+}
+
+function formatPrice(num) {
+  return new Intl.NumberFormat('uz-UZ').format(Math.round(num)) + ' so‘m';
+}
+
+const CATEGORY_LABELS = {
+  burgers: '🍔 Burgerlar',
+  lavash: '🌯 Lavash',
+  donar: '🥙 Donar & Shaurma',
+  chicken: '🍗 Sochli Tovuq',
+  hotdogs: '🌭 Xot-dog & Sendvich',
+  sides: '🍟 Kartoshka & Sous',
+  drinks: '🥤 Ichimliklar',
+  desserts: '🍫 Desertlar'
+};
+
+// Reject non-admins early, but let /start through so we can show their chat ID.
+bot.use((ctx, next) => {
+  if (!ctx.chat) return next();
+  if (isAdmin(ctx)) return next();
+  const isStart = ctx.message?.text === '/start';
+  if (isStart) return next();
+  return; // silently ignore everything else from non-admins
+});
+
+// ---- /start ----
+bot.start((ctx) => {
+  if (!isAdmin(ctx)) {
+    console.log(`ℹ️  /start from non-admin chat ID: ${ctx.chat.id} (${ctx.from.first_name || ''})`);
+    return ctx.reply(
+      `Salom! Bu bot faqat administratorlar uchun.\n\nSizning Chat ID: ${ctx.chat.id}\n\n` +
+      `Agar siz administrator bo‘lsangiz, shu ID'ni ADMIN_CHAT_IDS o‘zgaruvchisiga qo‘shing va serverni qayta ishga tushiring.`
+    );
+  }
+
+  sessions.delete(ctx.chat.id);
+  return ctx.reply(
+    `👋 Salom, Admin!\n\nKuroCraft Menyu Boshqaruvi\n\n` +
+    `/menu — Menyuni ko‘rish va tahrirlash\n` +
+    `/qoshish — Yangi taom qo‘shish\n` +
+    `/bekor — Joriy amalni bekor qilish`
+  );
+});
+
+// ---- /bekor (cancel current flow) ----
+bot.command('bekor', (ctx) => {
+  sessions.delete(ctx.chat.id);
+  return ctx.reply('✅ Bekor qilindi.');
+});
+
+// ---- /menu — show category picker ----
+bot.command('menu', (ctx) => sendCategoryPicker(ctx));
+
+function categoryKeyboard() {
+  const categories = getCategories();
+  return Markup.inlineKeyboard(
+    categories.map(cat => ([Markup.button.callback(CATEGORY_LABELS[cat] || cat, `cat:${cat}`)]))
+  );
+}
+
+async function sendCategoryPicker(ctx) {
+  await ctx.reply('📋 Toifani tanlang:', categoryKeyboard());
+}
+
+function itemListKeyboard(category) {
+  const items = readMenu().filter(i => i.category === category);
+  const rows = items.map(item => ([
+    Markup.button.callback(`${item.name} — ${formatPrice(item.price)}`, `item:${item.id}`)
+  ]));
+  rows.push([Markup.button.callback('⬅️ Orqaga', 'back:categories')]);
+  return Markup.inlineKeyboard(rows);
+}
+
+async function showItemList(ctx, category, edit) {
+  const text = `${CATEGORY_LABELS[category] || category}\n\nTaomni tanlang:`;
+  const keyboard = itemListKeyboard(category);
+  if (edit) {
+    await ctx.editMessageText(text, keyboard);
+  } else {
+    await ctx.reply(text, keyboard);
+  }
+}
+
+function itemDetailText(item) {
+  return (
+    `🍽 ${item.name}\n` +
+    `${item.subtitle || ''}\n\n` +
+    `💰 Narxi: ${formatPrice(item.price)}\n` +
+    `📁 Toifa: ${CATEGORY_LABELS[item.category] || item.category}\n` +
+    `⭐ Reyting: ${item.rating}\n` +
+    `${item.featured ? '✨ Saralanganlar ro‘yxatida' : ''}`
+  );
+}
+
+function itemDetailKeyboard(item) {
+  return Markup.inlineKeyboard([
+    [Markup.button.callback('✏️ Narxni O‘zgartirish', `editprice:${item.id}`)],
+    [Markup.button.callback(
+      item.featured ? '☆ Saralanganlardan Olib Tashlash' : '⭐ Saralanganlarga Qo‘shish',
+      `togglefeatured:${item.id}`
+    )],
+    [Markup.button.callback('🗑 O‘chirish', `deleteconfirm:${item.id}`)],
+    [Markup.button.callback('⬅️ Orqaga', `back:cat:${item.category}`)]
+  ]);
+}
+
+async function showItemDetail(ctx, itemId, edit) {
+  const item = readMenu().find(i => i.id === itemId);
+  if (!item) {
+    return ctx.reply('❌ Taom topilmadi (o‘chirilgan bo‘lishi mumkin).');
+  }
+  const text = itemDetailText(item);
+  const keyboard = itemDetailKeyboard(item);
+  if (edit) {
+    await ctx.editMessageText(text, keyboard);
+  } else {
+    await ctx.reply(text, keyboard);
+  }
+}
+
+// ---- /qoshish — add new item flow ----
+bot.command('qoshish', (ctx) => {
+  sessions.set(ctx.chat.id, { action: 'add_name', draft: {} });
+  return ctx.reply('➕ Yangi taom qo‘shish.\n\nTaom nomini kiriting (masalan: "Katta Burger"):');
+});
+
+// ---- Callback query (button) handlers ----
+bot.action('back:categories', async (ctx) => {
+  await ctx.answerCbQuery();
+  await sendCategoryPicker(ctx);
+  await ctx.deleteMessage().catch(() => {});
+});
+
+bot.action(/^back:cat:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  await showItemList(ctx, ctx.match[1], true);
+});
+
+bot.action(/^cat:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  await showItemList(ctx, ctx.match[1], true);
+});
+
+bot.action(/^item:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  await showItemDetail(ctx, ctx.match[1], true);
+});
+
+bot.action(/^editprice:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  sessions.set(ctx.chat.id, { action: 'awaiting_price', itemId: ctx.match[1] });
+  await ctx.reply('💰 Yangi narxni kiriting (faqat raqam, masalan: 45000):');
+});
+
+bot.action(/^togglefeatured:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  const itemId = ctx.match[1];
+  const item = readMenu().find(i => i.id === itemId);
+  if (item) {
+    updateItem(itemId, { featured: !item.featured });
+    await showItemDetail(ctx, itemId, true);
+  }
+});
+
+bot.action(/^deleteconfirm:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  const itemId = ctx.match[1];
+  await ctx.editMessageText(
+    '❗️ Ushbu taomni o‘chirishga aminmisiz?',
+    Markup.inlineKeyboard([
+      [
+        Markup.button.callback('✅ Ha, o‘chirish', `deleteyes:${itemId}`),
+        Markup.button.callback('❌ Bekor qilish', `item:${itemId}`)
+      ]
+    ])
+  );
+});
+
+bot.action(/^deleteyes:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  const itemId = ctx.match[1];
+  const item = readMenu().find(i => i.id === itemId);
+  deleteItem(itemId);
+  await ctx.editMessageText(`🗑 "${item ? item.name : itemId}" o‘chirildi.`);
+});
+
+// ---- Handle plain text replies (for multi-step flows) ----
+bot.on('text', async (ctx) => {
+  const chatId = ctx.chat.id;
+  const session = sessions.get(chatId);
+  if (!session) return;
+  const text = ctx.message.text.trim();
+
+  // --- Editing price of an existing item ---
+  if (session.action === 'awaiting_price') {
+    const newPrice = parseInt(text.replace(/[^\d]/g, ''), 10);
+    if (isNaN(newPrice) || newPrice <= 0) {
+      return ctx.reply('⚠️ Iltimos, to‘g‘ri raqam kiriting (masalan: 45000).');
+    }
+    const updated = updateItem(session.itemId, {
+      price: newPrice,
+      priceDisplay: formatPrice(newPrice)
+    });
+    sessions.delete(chatId);
+    if (updated) {
+      return ctx.reply(`✅ "${updated.name}" narxi ${formatPrice(newPrice)} ga o‘zgartirildi.\n\nSaytda 1 daqiqa ichida yangilanadi.`);
+    }
+    return ctx.reply('❌ Xatolik yuz berdi.');
+  }
+
+  // --- Add new item flow (multi-step) ---
+  if (session.action === 'add_name') {
+    session.draft.name = text;
+    session.action = 'add_category';
+    sessions.set(chatId, session);
+    const categories = Object.keys(CATEGORY_LABELS);
+    return ctx.reply(`Toifani tanlang:\n\n${categories.map((c, i) => `${i + 1}. ${CATEGORY_LABELS[c]}`).join('\n')}\n\nRaqamini yuboring:`);
+  }
+
+  if (session.action === 'add_category') {
+    const categories = Object.keys(CATEGORY_LABELS);
+    const idx = parseInt(text, 10) - 1;
+    if (isNaN(idx) || !categories[idx]) {
+      return ctx.reply('⚠️ Iltimos, ro‘yxatdagi raqamni yuboring.');
+    }
+    session.draft.category = categories[idx];
+    session.action = 'add_price';
+    sessions.set(chatId, session);
+    return ctx.reply('💰 Narxini kiriting (faqat raqam, masalan: 42000):');
+  }
+
+  if (session.action === 'add_price') {
+    const price = parseInt(text.replace(/[^\d]/g, ''), 10);
+    if (isNaN(price) || price <= 0) {
+      return ctx.reply('⚠️ Iltimos, to‘g‘ri raqam kiriting.');
+    }
+    session.draft.price = price;
+    session.action = 'add_image';
+    sessions.set(chatId, session);
+    return ctx.reply('🖼 Rasm uchun havolani (URL) yuboring (yoki "yo‘q" deb yozing):');
+  }
+
+  if (session.action === 'add_image') {
+    const lower = text.toLowerCase();
+    const image = (lower === 'yo‘q' || lower === 'yoq')
+      ? 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80'
+      : text;
+
+    const draft = session.draft;
+    const id = `custom-${Date.now()}`;
+    const newItem = {
+      id,
+      name: draft.name,
+      subtitle: '',
+      category: draft.category,
+      price: draft.price,
+      priceDisplay: formatPrice(draft.price),
+      rating: 4.8,
+      reviewsCount: 0,
+      cookTime: '10 daq',
+      calories: '-',
+      spiceLevel: 0,
+      image,
+      featured: false,
+      badge: null,
+      tags: [],
+      description: '',
+      ingredients: [],
+      nutrition: { protein: '-', carbs: '-', fat: '-', sodium: '-' },
+      customOptions: [],
+      ru: null
+    };
+
+    addItem(newItem);
+    sessions.delete(chatId);
+    return ctx.reply(`✅ Yangi taom qo‘shildi!\n\n🍽 ${newItem.name}\n💰 ${newItem.priceDisplay}\n📁 ${CATEGORY_LABELS[newItem.category]}\n\nSaytda 1 daqiqa ichida ko‘rinadi.`);
+  }
+});
+
+bot.catch((err, ctx) => {
+  console.error(`Bot error for ${ctx.updateType}:`, err);
+});
+
+bot.launch().then(() => {
+  console.log('🤖 Telegram bot started (polling)...');
+});
+
+// Graceful shutdown
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
