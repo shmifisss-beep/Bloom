@@ -141,19 +141,30 @@ async function showItemList(ctx, category, edit) {
 }
 
 function itemDetailText(item) {
+  const ingredientsList = (item.ingredients && item.ingredients.length)
+    ? item.ingredients.map(i => `• ${i}`).join('\n')
+    : '— (kiritilmagan)';
+
+  const nutrition = item.nutrition || {};
+
   return (
     `🍽 ${item.name}\n` +
     `${item.subtitle || ''}\n\n` +
     `💰 Narxi: ${formatPrice(item.price)}\n` +
     `📁 Toifa: ${CATEGORY_LABELS[item.category] || item.category}\n` +
     `⭐ Reyting: ${item.rating}\n` +
-    `${item.featured ? '✨ Saralanganlar ro‘yxatida' : ''}`
+    `${item.featured ? '✨ Saralanganlar ro‘yxatida\n' : ''}\n` +
+    `📝 Tarkibi:\n${ingredientsList}\n\n` +
+    `🥗 Ozuqaviy qiymati:\n` +
+    `Kaloriya: ${item.calories || '-'} | Oqsil: ${nutrition.protein || '-'} | Uglevod: ${nutrition.carbs || '-'} | Yog‘: ${nutrition.fat || '-'}`
   );
 }
 
 function itemDetailKeyboard(item) {
   return Markup.inlineKeyboard([
     [Markup.button.callback('✏️ Narxni O‘zgartirish', `editprice:${item.id}`)],
+    [Markup.button.callback('📝 Tarkibini O‘zgartirish', `editingredients:${item.id}`)],
+    [Markup.button.callback('🥗 Ozuqaviy Qiymatni O‘zgartirish', `editnutrition:${item.id}`)],
     [Markup.button.callback(
       item.featured ? '☆ Saralanganlardan Olib Tashlash' : '⭐ Saralanganlarga Qo‘shish',
       `togglefeatured:${item.id}`
@@ -211,6 +222,34 @@ bot.action(/^editprice:(.+)$/, async (ctx) => {
   await ctx.reply('💰 Yangi narxni kiriting (faqat raqam, masalan: 45000):');
 });
 
+bot.action(/^editingredients:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  const itemId = ctx.match[1];
+  const item = readMenu().find(i => i.id === itemId);
+  const current = (item && item.ingredients && item.ingredients.length)
+    ? item.ingredients.map(i => `• ${i}`).join('\n')
+    : '— (kiritilmagan)';
+  sessions.set(ctx.chat.id, { action: 'awaiting_ingredients', itemId });
+  await ctx.reply(
+    `📝 Joriy tarkib:\n${current}\n\n` +
+    `Yangi tarkibni yuboring — har bir ingredientni alohida qatorga yozing.\n\n` +
+    `Masalan:\nMol go‘shti kotleti\nYangi bulochka\nPomidor va bodring`
+  );
+});
+
+bot.action(/^editnutrition:(.+)$/, async (ctx) => {
+  await ctx.answerCbQuery();
+  const itemId = ctx.match[1];
+  const item = readMenu().find(i => i.id === itemId);
+  const n = (item && item.nutrition) || {};
+  sessions.set(ctx.chat.id, { action: 'awaiting_calories', itemId, nutritionDraft: {} });
+  await ctx.reply(
+    `🥗 Joriy qiymatlar:\n` +
+    `Kaloriya: ${item?.calories || '-'} | Oqsil: ${n.protein || '-'} | Uglevod: ${n.carbs || '-'} | Yog‘: ${n.fat || '-'}\n\n` +
+    `Kaloriyani kiriting (masalan: 540 kkal):`
+  );
+});
+
 bot.action(/^togglefeatured:(.+)$/, async (ctx) => {
   await ctx.answerCbQuery();
   const itemId = ctx.match[1];
@@ -263,6 +302,83 @@ bot.on('text', async (ctx) => {
     sessions.delete(chatId);
     if (updated) {
       return ctx.reply(`✅ "${updated.name}" narxi ${formatPrice(newPrice)} ga o‘zgartirildi.\n\nSaytda 1 daqiqa ichida yangilanadi.`);
+    }
+    return ctx.reply('❌ Xatolik yuz berdi.');
+  }
+
+  // --- Editing ingredients of an existing item ---
+  if (session.action === 'awaiting_ingredients') {
+    const ingredients = text
+      .split('\n')
+      .map(s => s.replace(/^[•\-*]\s*/, '').trim())
+      .filter(Boolean);
+
+    if (ingredients.length === 0) {
+      return ctx.reply('⚠️ Iltimos, kamida bitta ingredient kiriting (har birini alohida qatorga yozing).');
+    }
+
+    const item = readMenu().find(i => i.id === session.itemId);
+    const patch = { ingredients };
+    // Clear the stale Russian translation of ingredients so the site doesn't show
+    // a mismatched old translation next to the new Uzbek list. The site will fall
+    // back to showing the Uzbek text in Russian mode until retranslated.
+    if (item && item.ru && item.ru.ingredients) {
+      patch.ru = { ...item.ru, ingredients: undefined };
+    }
+    const updated = updateItem(session.itemId, patch);
+    sessions.delete(chatId);
+    if (updated) {
+      return ctx.reply(
+        `✅ "${updated.name}" tarkibi yangilandi:\n${ingredients.map(i => `• ${i}`).join('\n')}\n\n` +
+        `Saytda 1 daqiqa ichida yangilanadi.`
+      );
+    }
+    return ctx.reply('❌ Xatolik yuz berdi.');
+  }
+
+  // --- Editing nutrition of an existing item (multi-step: calories -> protein -> carbs -> fat) ---
+  if (session.action === 'awaiting_calories') {
+    session.nutritionDraft.calories = text;
+    session.action = 'awaiting_protein';
+    sessions.set(chatId, session);
+    return ctx.reply('💪 Oqsil miqdorini kiriting (masalan: 24g):');
+  }
+
+  if (session.action === 'awaiting_protein') {
+    session.nutritionDraft.protein = text;
+    session.action = 'awaiting_carbs';
+    sessions.set(chatId, session);
+    return ctx.reply('🍞 Uglevod miqdorini kiriting (masalan: 38g):');
+  }
+
+  if (session.action === 'awaiting_carbs') {
+    session.nutritionDraft.carbs = text;
+    session.action = 'awaiting_fat';
+    sessions.set(chatId, session);
+    return ctx.reply('🧈 Yog‘ miqdorini kiriting (masalan: 26g):');
+  }
+
+  if (session.action === 'awaiting_fat') {
+    session.nutritionDraft.fat = text;
+    const draft = session.nutritionDraft;
+    const item = readMenu().find(i => i.id === session.itemId);
+    const updated = updateItem(session.itemId, {
+      calories: draft.calories,
+      nutrition: {
+        ...(item?.nutrition || {}),
+        protein: draft.protein,
+        carbs: draft.carbs,
+        fat: draft.fat,
+        sodium: item?.nutrition?.sodium || '-'
+      }
+    });
+    sessions.delete(chatId);
+    if (updated) {
+      return ctx.reply(
+        `✅ "${updated.name}" ozuqaviy qiymati yangilandi:\n` +
+        `Kaloriya: ${draft.calories} | Oqsil: ${draft.protein} | Uglevod: ${draft.carbs} | Yog‘: ${draft.fat}\n\n` +
+        `Saytda 1 daqiqa ichida yangilanadi.`
+      );
     }
     return ctx.reply('❌ Xatolik yuz berdi.');
   }
