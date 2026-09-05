@@ -148,17 +148,29 @@ bot.command('menu', (ctx) => sendCategoryPicker(ctx));
 
 function categoryKeyboard() {
   const categories = getCategories();
-  return Markup.inlineKeyboard(
-    categories.map(cat => ([Markup.button.callback(CATEGORY_LABELS[cat] || cat, `cat:${cat}`)]))
-  );
+  const rows = categories.map(cat => ([Markup.button.callback(CATEGORY_LABELS[cat] || cat, `cat:${cat}`)]));
+  rows.push([Markup.button.callback('⭐ Saralanganlar', 'cat:__featured')]);
+  return Markup.inlineKeyboard(rows);
 }
 
 async function sendCategoryPicker(ctx) {
   await ctx.reply('📋 Toifani tanlang:', categoryKeyboard());
 }
 
+function getItemsForFilter(category) {
+  if (category === '__featured') {
+    return readMenu().filter(i => i.featured);
+  }
+  return readMenu().filter(i => i.category === category);
+}
+
+function filterLabel(category) {
+  if (category === '__featured') return '⭐ Saralanganlar';
+  return CATEGORY_LABELS[category] || category;
+}
+
 function itemListKeyboard(category) {
-  const items = readMenu().filter(i => i.category === category);
+  const items = getItemsForFilter(category);
   const rows = items.map(item => ([
     Markup.button.callback(`${item.name} — ${formatPrice(item.price)}`, `item:${item.id}`)
   ]));
@@ -167,7 +179,10 @@ function itemListKeyboard(category) {
 }
 
 async function showItemList(ctx, category, edit) {
-  const text = `${CATEGORY_LABELS[category] || category}\n\nTaomni tanlang:`;
+  const items = getItemsForFilter(category);
+  const text = items.length
+    ? `${filterLabel(category)}\n\nTaomni tanlang:`
+    : `${filterLabel(category)}\n\nHozircha bu yerda taom yo‘q.${category === '__featured' ? '\n\nTaom kartochkasidagi "⭐ Saralanganlarga Qo‘shish" tugmasi orqali qo‘shishingiz mumkin.' : ''}`;
   const keyboard = itemListKeyboard(category);
   if (edit) {
     await ctx.editMessageText(text, keyboard);
