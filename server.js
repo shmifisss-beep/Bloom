@@ -3,6 +3,12 @@ import express from 'express';
 import cors from 'cors';
 import { Telegraf, Markup } from 'telegraf';
 import { readMenu, updateItem, addItem, deleteItem, getCategories } from './db.js';
+import { mkdirSync, createWriteStream, existsSync } from 'fs';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { pipeline } from 'stream/promises';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // ─────────────────────────────────────────────────────────────
 // CONFIG
@@ -15,6 +21,12 @@ const ADMIN_IDS = (process.env.ADMIN_CHAT_IDS || '')
   .filter(Boolean)
   .map(Number);
 
+// Public URL of THIS server (e.g. https://your-app.up.railway.app). Needed so
+// photos uploaded through the bot can be turned into a public image link the
+// website can display. Set this in Railway → Variables once you have your
+// domain (see README).
+const PUBLIC_URL = (process.env.PUBLIC_URL || '').replace(/\/$/, '');
+
 if (!BOT_TOKEN) {
   console.error('❌ BOT_TOKEN is missing. Set it in your .env file or hosting environment variables.');
   process.exit(1);
@@ -25,12 +37,24 @@ if (ADMIN_IDS.length === 0) {
   console.warn('    Message your bot, run /start, and check the reply for your chat ID.');
 }
 
+if (!PUBLIC_URL) {
+  console.warn('⚠️  PUBLIC_URL is empty — photo uploads from the bot will not work until you set it.');
+  console.warn('    Set PUBLIC_URL to your Railway domain, e.g. https://your-app.up.railway.app');
+}
+
+// ─────────────────────────────────────────────────────────────
+// UPLOADED IMAGES (photos sent to the bot get saved here)
+// ─────────────────────────────────────────────────────────────
+const UPLOADS_DIR = join(__dirname, 'data', 'images');
+if (!existsSync(UPLOADS_DIR)) mkdirSync(UPLOADS_DIR, { recursive: true });
+
 // ─────────────────────────────────────────────────────────────
 // REST API (used by the website to load the live menu)
 // ─────────────────────────────────────────────────────────────
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/images', express.static(UPLOADS_DIR));
 
 app.get('/api/menu', (req, res) => {
   res.json(readMenu());
@@ -56,6 +80,18 @@ const sessions = new Map();
 
 function isAdmin(ctx) {
   return ADMIN_IDS.includes(ctx.chat.id);
+}
+
+async function downloadTelegramPhoto(ctx, fileId) {
+  const fileUrl = await ctx.telegram.getFileLink(fileId);
+  const response = await fetch(fileUrl.href);
+  if (!response.ok || !response.body) {
+    throw new Error(`Failed to download photo: ${response.status}`);
+  }
+  const filename = `${Date.now()}-${Math.round(Math.random() * 1e6)}.jpg`;
+  const filepath = join(UPLOADS_DIR, filename);
+  await pipeline(response.body, createWriteStream(filepath));
+  return `${PUBLIC_URL}/images/${filename}`;
 }
 
 function formatPrice(num) {
@@ -188,6 +224,55 @@ async function showItemDetail(ctx, itemId, edit) {
   }
 }
 
+function finalizeNewItem(ctx, chatId, draft) {
+  const id = `custom-${Date.now()}`;
+  const newItem = {
+    id,
+    name: draft.name,
+    subtitle: '',
+    category: draft.category,
+    price: draft.price,
+    priceDisplay: formatPrice(draft.price),
+    rating: 4.8,
+    reviewsCount: 0,
+    cookTime: '10 daq',
+    calories: draft.calories || '-',
+    spiceLevel: 0,
+    image: draft.image,
+    featured: false,
+    badge: null,
+    tags: [],
+    description: draft.description || '',
+    ingredients: draft.ingredients || [],
+    nutrition: {
+      protein: draft.protein || '-',
+      carbs: draft.carbs || '-',
+      fat: draft.fat || '-',
+      sodium: '-'
+    },
+    customOptions: [],
+    ru: null
+  };
+
+  addItem(newItem);
+  sessions.delete(chatId);
+
+  const ingredientsList = (newItem.ingredients.length)
+    ? newItem.ingredients.map(i => `• ${i}`).join('\n')
+    : '— (kiritilmagan)';
+
+  return ctx.reply(
+    `✅ Yangi taom qo‘shildi!\n\n` +
+    `🍽 ${newItem.name}\n` +
+    `💰 ${newItem.priceDisplay}\n` +
+    `📁 ${CATEGORY_LABELS[newItem.category]}\n` +
+    `${newItem.description ? `📄 ${newItem.description}\n` : ''}` +
+    `📝 Tarkibi:\n${ingredientsList}\n` +
+    `🥗 Kaloriya: ${newItem.calories} | Oqsil: ${newItem.nutrition.protein} | Uglevod: ${newItem.nutrition.carbs} | Yog‘: ${newItem.nutrition.fat}\n\n` +
+    `Saytda 1 daqiqa ichida ko‘rinadi.`
+  );
+}
+
 // ---- /qoshish — add new item flow ----
 bot.command('qoshish', (ctx) => {
   sessions.set(ctx.chat.id, { action: 'add_name', draft: {} });
@@ -280,6 +365,51 @@ bot.action(/^deleteyes:(.+)$/, async (ctx) => {
   const item = readMenu().find(i => i.id === itemId);
   deleteItem(itemId);
   await ctx.editMessageText(`🗑 "${item ? item.name : itemId}" o‘chirildi.`);
+});
+
+bot.action('addskip:ingredients', async (ctx) => {
+  await ctx.answerCbQuery();
+  const chatId = ctx.chat.id;
+  const session = sessions.get(chatId);
+  if (!session || session.action !== 'add_ingredients') return;
+  session.draft.ingredients = [];
+  await finalizeNewItem(ctx, chatId, session.draft);
+});
+
+// ---- Handle photo uploads (used for the image step when adding a new item) ----
+bot.on('photo', async (ctx) => {
+  const chatId = ctx.chat.id;
+  const session = sessions.get(chatId);
+  if (!session || session.action !== 'add_image') return;
+
+  if (!PUBLIC_URL) {
+    return ctx.reply(
+      '⚠️ Serverda PUBLIC_URL sozlanmagan, shuning uchun fotoni saqlab bo‘lmadi.\n\n' +
+      'Iltimos, hozircha rasm havolasini (URL) matn sifatida yuboring, yoki administratorga ' +
+      'PUBLIC_URL o‘zgaruvchisini sozlashni so‘rang.'
+    );
+  }
+
+  try {
+    const photos = ctx.message.photo;
+    const largest = photos[photos.length - 1]; // Telegram sends smallest→largest
+    await ctx.reply('⏳ Foto yuklanmoqda...');
+    const imageUrl = await downloadTelegramPhoto(ctx, largest.file_id);
+
+    session.draft.image = imageUrl;
+    session.action = 'add_ingredients';
+    sessions.set(chatId, session);
+
+    await ctx.reply(
+      '✅ Foto saqlandi!\n\n' +
+      '📝 Tarkibini kiriting — har bir ingredientni alohida qatorga yozing.\n\n' +
+      'Masalan:\nMol go‘shti kotleti\nYangi bulochka\nMaxsus sous',
+      Markup.inlineKeyboard([[Markup.button.callback('⏭ Tarkibsiz o‘tkazish', 'addskip:ingredients')]])
+    );
+  } catch (err) {
+    console.error('Photo download error:', err.message);
+    await ctx.reply('❌ Fotoni saqlashda xatolik yuz berdi. Qaytadan urinib ko‘ring yoki rasm havolasini (URL) yuboring.');
+  }
 });
 
 // ---- Handle plain text replies (for multi-step flows) ----
@@ -412,43 +542,30 @@ bot.on('text', async (ctx) => {
     session.draft.price = price;
     session.action = 'add_image';
     sessions.set(chatId, session);
-    return ctx.reply('🖼 Rasm uchun havolani (URL) yuboring (yoki "yo‘q" deb yozing):');
+    return ctx.reply('🖼 Rasmni yuboring — telefondan foto sifatida jo‘nating YOKI rasm havolasini (URL) yozing (yoki "yo‘q" deb yozing):');
   }
 
   if (session.action === 'add_image') {
     const lower = text.toLowerCase();
-    const image = (lower === 'yo‘q' || lower === 'yoq')
+    session.draft.image = (lower === 'yo‘q' || lower === 'yoq')
       ? 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80'
       : text;
+    session.action = 'add_ingredients';
+    sessions.set(chatId, session);
+    return ctx.reply(
+      '📝 Tarkibini kiriting — har bir ingredientni alohida qatorga yozing.\n\n' +
+      'Masalan:\nMol go‘shti kotleti\nYangi bulochka\nMaxsus sous',
+      Markup.inlineKeyboard([[Markup.button.callback('⏭ Tarkibsiz o‘tkazish', 'addskip:ingredients')]])
+    );
+  }
 
-    const draft = session.draft;
-    const id = `custom-${Date.now()}`;
-    const newItem = {
-      id,
-      name: draft.name,
-      subtitle: '',
-      category: draft.category,
-      price: draft.price,
-      priceDisplay: formatPrice(draft.price),
-      rating: 4.8,
-      reviewsCount: 0,
-      cookTime: '10 daq',
-      calories: '-',
-      spiceLevel: 0,
-      image,
-      featured: false,
-      badge: null,
-      tags: [],
-      description: '',
-      ingredients: [],
-      nutrition: { protein: '-', carbs: '-', fat: '-', sodium: '-' },
-      customOptions: [],
-      ru: null
-    };
-
-    addItem(newItem);
-    sessions.delete(chatId);
-    return ctx.reply(`✅ Yangi taom qo‘shildi!\n\n🍽 ${newItem.name}\n💰 ${newItem.priceDisplay}\n📁 ${CATEGORY_LABELS[newItem.category]}\n\nSaytda 1 daqiqa ichida ko‘rinadi.`);
+  if (session.action === 'add_ingredients') {
+    const ingredients = text
+      .split('\n')
+      .map(s => s.replace(/^[•\-*]\s*/, '').trim())
+      .filter(Boolean);
+    session.draft.ingredients = ingredients;
+    return finalizeNewItem(ctx, chatId, session.draft);
   }
 });
 
