@@ -1,0 +1,2551 @@
+[
+  {
+    "id": "mb-burger",
+    "name": "Burger",
+    "subtitle": "Klassik Mol Go‘shti Burgeri",
+    "category": "burgers",
+    "price": 42000,
+    "priceDisplay": "42 000 so‘m",
+    "rating": 4.76,
+    "reviewsCount": 72,
+    "cookTime": "8-10 daq",
+    "calories": "540 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733107287664779.webp",
+    "featured": true,
+    "badge": "MIJOZLAR SEVIMLISI",
+    "tags": [
+      "Mol go‘shti",
+      "Klassik"
+    ],
+    "description": "Sochli mol go‘shti kotleti, yangi sabzavotlar va maxsus sous bilan tayyorlangan klassik burger.",
+    "ingredients": [
+      "Mol go‘shti kotleti",
+      "Yangi pishirilgan bulochka",
+      "Pomidor va tuzlangan bodring",
+      "Salat bargi",
+      "Maxsus Mix sousi"
+    ],
+    "nutrition": {
+      "protein": "24g",
+      "carbs": "38g",
+      "fat": "26g",
+      "sodium": "620mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета",
+        "Свежеиспечённая булочка",
+        "Помидор и солёный огурец",
+        "Листья салата",
+        "Фирменный соус Mix"
+      ],
+      "subtitle": "Классический Говяжий Бургер",
+      "description": "Сочная говяжья котлета, свежие овощи и фирменный соус в свежеиспечённой булочке.",
+      "tags": [
+        "Говядина",
+        "Классика"
+      ],
+      "badge": "ЛЮБИМЕЦ ГОСТЕЙ"
+    }
+  },
+  {
+    "id": "mb-burger-junior",
+    "name": "Burger Junior",
+    "subtitle": "Kichik O‘lchamdagi Klassik Burger",
+    "category": "burgers",
+    "price": 25000,
+    "priceDisplay": "25 000 so‘m",
+    "rating": 4.8,
+    "reviewsCount": 185,
+    "cookTime": "7-9 daq",
+    "calories": "360 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733121259983360.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Kichik Porsiya"
+    ],
+    "description": "Klassik burgerning kichraytirilgan, yengil variant — tez va mazali tamaddi uchun.",
+    "ingredients": [
+      "Mol go‘shti kotleti",
+      "Yangi pishirilgan bulochka",
+      "Pomidor va tuzlangan bodring",
+      "Salat bargi",
+      "Maxsus Mix sousi"
+    ],
+    "nutrition": {
+      "protein": "16g",
+      "carbs": "28g",
+      "fat": "17g",
+      "sodium": "440mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета",
+        "Свежеиспечённая булочка",
+        "Помидор и солёный огурец",
+        "Листья салата",
+        "Фирменный соус Mix"
+      ],
+      "subtitle": "Классический Бургер Меньшего Размера",
+      "description": "Уменьшенная и облегчённая версия классического бургера — для быстрого перекуса.",
+      "tags": [
+        "Говядина",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-chizburger",
+    "name": "Chizburger",
+    "subtitle": "Erigan Pishloqli Mol Go‘shti Burgeri",
+    "category": "burgers",
+    "price": 46000,
+    "priceDisplay": "46 000 so‘m",
+    "rating": 4.59,
+    "reviewsCount": 112,
+    "cookTime": "8-10 daq",
+    "calories": "610 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733139343566718.webp",
+    "featured": true,
+    "badge": "TOP TANLOV",
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli"
+    ],
+    "description": "Sochli mol go‘shti kotleti ustiga erigan pishloq, yangi sabzavotlar va maxsus sous qo‘shilgan.",
+    "ingredients": [
+      "Mol go‘shti kotleti",
+      "Yangi pishirilgan bulochka",
+      "Pomidor va tuzlangan bodring",
+      "Salat bargi",
+      "Maxsus Mix sousi",
+      "Erigan pishloq"
+    ],
+    "nutrition": {
+      "protein": "27g",
+      "carbs": "39g",
+      "fat": "31g",
+      "sodium": "710mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета",
+        "Свежеиспечённая булочка",
+        "Помидор и солёный огурец",
+        "Листья салата",
+        "Фирменный соус Mix",
+        "Плавленый сыр"
+      ],
+      "subtitle": "Говяжий Бургер с Плавленым Сыром",
+      "description": "Сочная говяжья котлета с плавленым сыром, свежими овощами и фирменным соусом.",
+      "tags": [
+        "Говядина",
+        "С Сыром"
+      ],
+      "badge": "ТОП ВЫБОР"
+    }
+  },
+  {
+    "id": "mb-chizburger-junior",
+    "name": "Chizburger Junior",
+    "subtitle": "Kichik O‘lchamdagi Pishloqli Burger",
+    "category": "burgers",
+    "price": 28000,
+    "priceDisplay": "28 000 so‘m",
+    "rating": 4.77,
+    "reviewsCount": 339,
+    "cookTime": "7-9 daq",
+    "calories": "410 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733148413706558.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli",
+      "Kichik Porsiya"
+    ],
+    "description": "Chizburgerning kichikroq va yengilroq versiyasi, bir xil mazali ta’m bilan.",
+    "ingredients": [
+      "Mol go‘shti kotleti",
+      "Yangi pishirilgan bulochka",
+      "Pomidor va tuzlangan bodring",
+      "Salat bargi",
+      "Maxsus Mix sousi",
+      "Erigan pishloq"
+    ],
+    "nutrition": {
+      "protein": "18g",
+      "carbs": "29g",
+      "fat": "20g",
+      "sodium": "500mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета",
+        "Свежеиспечённая булочка",
+        "Помидор и солёный огурец",
+        "Листья салата",
+        "Фирменный соус Mix",
+        "Плавленый сыр"
+      ],
+      "subtitle": "Сырный Бургер Меньшего Размера",
+      "description": "Уменьшенная и облегчённая версия чизбургера с тем же насыщенным вкусом.",
+      "tags": [
+        "Говядина",
+        "С Сыром",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-dablburger",
+    "name": "Dablburger",
+    "subtitle": "Ikki Qavat Mol Go‘shti Kotletli Burger",
+    "category": "burgers",
+    "price": 58000,
+    "priceDisplay": "58 000 so‘m",
+    "rating": 4.53,
+    "reviewsCount": 276,
+    "cookTime": "10-12 daq",
+    "calories": "780 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733163646681157.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Ikki Qavat"
+    ],
+    "description": "Ikki qavat sochli mol go‘shti kotleti, yangi sabzavotlar va maxsus sous bilan to‘yimli burger.",
+    "ingredients": [
+      "Ikki qavat mol go‘shti kotleti",
+      "Yangi bulochka",
+      "Pomidor va bodring",
+      "Salat bargi",
+      "Maxsus sous"
+    ],
+    "nutrition": {
+      "protein": "38g",
+      "carbs": "40g",
+      "fat": "42g",
+      "sodium": "860mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Двойная говяжья котлета",
+        "Свежая булочка",
+        "Помидор и огурец",
+        "Листья салата",
+        "Фирменный соус"
+      ],
+      "subtitle": "Бургер с Двойной Говяжьей Котлетой",
+      "description": "Двойная сочная говяжья котлета, свежие овощи и фирменный соус — сытный бургер.",
+      "tags": [
+        "Говядина",
+        "Двойная Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-dablburger-junior",
+    "name": "Dablburger Junior",
+    "subtitle": "Kichik O‘lchamdagi Dablburger",
+    "category": "burgers",
+    "price": 36000,
+    "priceDisplay": "36 000 so‘m",
+    "rating": 4.51,
+    "reviewsCount": 107,
+    "cookTime": "9-11 daq",
+    "calories": "560 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733175453358049.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Ikki Qavat",
+      "Kichik Porsiya"
+    ],
+    "description": "Ikki qavat kotletli burgerning ixcham versiyasi.",
+    "ingredients": [
+      "Ikki qavat mol go‘shti kotleti",
+      "Yangi bulochka",
+      "Sabzavotlar",
+      "Maxsus sous"
+    ],
+    "nutrition": {
+      "protein": "27g",
+      "carbs": "30g",
+      "fat": "29g",
+      "sodium": "620mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Двойная говяжья котлета",
+        "Свежая булочка",
+        "Овощи",
+        "Фирменный соус"
+      ],
+      "subtitle": "Компактный Даблбургер",
+      "description": "Уменьшенная версия бургера с двойной котлетой.",
+      "tags": [
+        "Говядина",
+        "Двойная Порция",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-dablchiz",
+    "name": "Dablchiz",
+    "subtitle": "Ikki Qavat Pishloqli Mol Go‘shti Burgeri",
+    "category": "burgers",
+    "price": 64000,
+    "priceDisplay": "64 000 so‘m",
+    "rating": 4.59,
+    "reviewsCount": 318,
+    "cookTime": "10-12 daq",
+    "calories": "860 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733188109668964.webp",
+    "featured": true,
+    "badge": "ENG TO‘YIMLI",
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli",
+      "Ikki Qavat"
+    ],
+    "description": "Ikki qavat mol go‘shti kotleti ustiga mo‘l-ko‘l erigan pishloq qo‘shilgan to‘yimli burger.",
+    "ingredients": [
+      "Ikki qavat mol go‘shti kotleti",
+      "Erigan pishloq (ikki qatlam)",
+      "Yangi bulochka",
+      "Sabzavotlar",
+      "Maxsus sous"
+    ],
+    "nutrition": {
+      "protein": "42g",
+      "carbs": "41g",
+      "fat": "48g",
+      "sodium": "940mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Двойная говяжья котлета",
+        "Плавленый сыр (двойной слой)",
+        "Свежая булочка",
+        "Овощи",
+        "Фирменный соус"
+      ],
+      "subtitle": "Двойной Говяжий Бургер с Сыром",
+      "description": "Двойная говяжья котлета с обильным плавленым сыром — максимально сытный бургер.",
+      "tags": [
+        "Говядина",
+        "С Сыром",
+        "Двойная Порция"
+      ],
+      "badge": "САМЫЙ СЫТНЫЙ"
+    }
+  },
+  {
+    "id": "mb-dablchiz-junior",
+    "name": "Dablchiz Junior",
+    "subtitle": "Kichik O‘lchamdagi Ikki Qavat Pishloqli Burger",
+    "category": "burgers",
+    "price": 42000,
+    "priceDisplay": "42 000 so‘m",
+    "rating": 4.74,
+    "reviewsCount": 161,
+    "cookTime": "9-11 daq",
+    "calories": "640 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733200504025963.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli",
+      "Kichik Porsiya"
+    ],
+    "description": "Dablchiz burgerining ixcham, ammo bir xil mazali versiyasi.",
+    "ingredients": [
+      "Ikki qavat mol go‘shti kotleti",
+      "Erigan pishloq",
+      "Yangi bulochka",
+      "Sabzavotlar"
+    ],
+    "nutrition": {
+      "protein": "31g",
+      "carbs": "31g",
+      "fat": "33g",
+      "sodium": "680mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Двойная говяжья котлета",
+        "Плавленый сыр",
+        "Свежая булочка",
+        "Овощи"
+      ],
+      "subtitle": "Компактный Двойной Сырный Бургер",
+      "description": "Уменьшенная, но такая же вкусная версия Даблчиза.",
+      "tags": [
+        "Говядина",
+        "С Сыром",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-chiken-chizburger",
+    "name": "Chiken Chizburger",
+    "subtitle": "Qarsildoq Tovuq Kotletli Pishloqli Burger",
+    "category": "burgers",
+    "price": 36000,
+    "priceDisplay": "36 000 so‘m",
+    "rating": 4.79,
+    "reviewsCount": 339,
+    "cookTime": "9-11 daq",
+    "calories": "560 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733270303861439.webp",
+    "featured": true,
+    "badge": "TOVUQ SEVUVCHILAR UCHUN",
+    "tags": [
+      "Tovuq",
+      "Pishloqli",
+      "Qarsildoq"
+    ],
+    "description": "Qarsildoq panirovkali tovuq kotleti, erigan pishloq va yangi sabzavotlar bilan tayyorlangan.",
+    "ingredients": [
+      "Qarsildoq panirovkali tovuq kotleti",
+      "Yangi pishirilgan bulochka",
+      "Pomidor va salat bargi",
+      "Maxsus sous",
+      "Erigan pishloq"
+    ],
+    "nutrition": {
+      "protein": "26g",
+      "carbs": "40g",
+      "fat": "27g",
+      "sodium": "690mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Хрустящая куриная котлета в панировке",
+        "Свежеиспечённая булочка",
+        "Помидор и листья салата",
+        "Фирменный соус",
+        "Плавленый сыр"
+      ],
+      "subtitle": "Хрустящий Куриный Бургер с Сыром",
+      "description": "Хрустящая куриная котлета в панировке, плавленый сыр и свежие овощи.",
+      "tags": [
+        "Курица",
+        "С Сыром",
+        "Хрустящее"
+      ],
+      "badge": "ДЛЯ ЛЮБИТЕЛЕЙ КУРИЦЫ"
+    }
+  },
+  {
+    "id": "mb-mini-burger",
+    "name": "Mini Burger",
+    "subtitle": "Bir Luqumlik Mini Burger",
+    "category": "burgers",
+    "price": 18000,
+    "priceDisplay": "18 000 so‘m",
+    "rating": 4.67,
+    "reviewsCount": 289,
+    "cookTime": "6-8 daq",
+    "calories": "290 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2026/04/09/1775733278103143753.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Mini",
+      "Tezkor"
+    ],
+    "description": "Tezkor tamaddi uchun ideal, ixcham va mazali mini burger.",
+    "ingredients": [
+      "Mol go‘shti kotleti (mini)",
+      "Mini bulochka",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "13g",
+      "carbs": "22g",
+      "fat": "14g",
+      "sodium": "360mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета (мини)",
+        "Мини-булочка",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Мини-Бургер на Один Укус",
+      "description": "Идеальный компактный бургер для быстрого перекуса.",
+      "tags": [
+        "Говядина",
+        "Мини",
+        "Быстро"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "lavash-classic",
+    "name": "Lavash",
+    "subtitle": "Klassik Lavash",
+    "category": "lavash",
+    "price": 40000,
+    "priceDisplay": "40 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 0,
+    "cookTime": "8-10 daq",
+    "calories": "-",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749023480163427513.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Klassik"
+    ],
+    "description": "Yumshoq lavashga o‘ralgan mol go‘shti, yangi sabzavotlar va firmaviy sous.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Sabzavotlar",
+      "Firmaviy sous"
+    ],
+    "nutrition": {
+      "protein": "-",
+      "carbs": "-",
+      "fat": "-",
+      "sodium": "-"
+    },
+    "customOptions": [],
+    "ru": {
+      "subtitle": "Классический Лаваш",
+      "description": "Говядина, свежие овощи и фирменный соус, завёрнутые в мягкий лаваш.",
+      "tags": [
+        "Говядина",
+        "Классика"
+      ],
+      "badge": null,
+      "ingredients": [
+        "Говядина",
+        "Овощи",
+        "Фирменный соус"
+      ]
+    }
+  },
+  {
+    "id": "lavash-big",
+    "name": "Lavash Big",
+    "subtitle": "Katta O‘lchamdagi Lavash",
+    "category": "lavash",
+    "price": 45000,
+    "priceDisplay": "45 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 0,
+    "cookTime": "8-10 daq",
+    "calories": "-",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749023480163427513.webp",
+    "featured": true,
+    "badge": "KATTA PORSIYA",
+    "tags": [
+      "Mol go‘shti",
+      "Katta Porsiya"
+    ],
+    "description": "Ko‘proq go‘sht va sabzavotlar bilan to‘ldirilgan katta o‘lchamdagi lavash.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Sabzavotlar",
+      "Firmaviy sous"
+    ],
+    "nutrition": {
+      "protein": "-",
+      "carbs": "-",
+      "fat": "-",
+      "sodium": "-"
+    },
+    "customOptions": [],
+    "ru": {
+      "subtitle": "Лаваш Большого Размера",
+      "description": "Лаваш большего размера с увеличенной порцией мяса и овощей.",
+      "tags": [
+        "Говядина",
+        "Большая Порция"
+      ],
+      "badge": "БОЛЬШАЯ ПОРЦИЯ",
+      "ingredients": [
+        "Говядина",
+        "Овощи",
+        "Фирменный соус"
+      ]
+    }
+  },
+  {
+    "id": "lavash-mini",
+    "name": "L Mini",
+    "subtitle": "Kichik O‘lchamdagi Lavash",
+    "category": "lavash",
+    "price": 35000,
+    "priceDisplay": "35 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 0,
+    "cookTime": "8-10 daq",
+    "calories": "-",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749023480163427513.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Kichik Porsiya"
+    ],
+    "description": "Tezkor tamaddi uchun qulay, ixcham o‘lchamdagi lavash.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "-",
+      "carbs": "-",
+      "fat": "-",
+      "sodium": "-"
+    },
+    "customOptions": [],
+    "ru": {
+      "subtitle": "Лаваш Маленького Размера",
+      "description": "Компактный лаваш — удобно для быстрого перекуса.",
+      "tags": [
+        "Говядина",
+        "Маленькая Порция"
+      ],
+      "badge": null,
+      "ingredients": [
+        "Говядина",
+        "Овощи",
+        "Соус"
+      ]
+    }
+  },
+  {
+    "id": "lavash-cheese-mini",
+    "name": "L Cheese Mini",
+    "subtitle": "Kichik Pishloqli Lavash",
+    "category": "lavash",
+    "price": 38000,
+    "priceDisplay": "38 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 0,
+    "cookTime": "8-10 daq",
+    "calories": "-",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749023480163427513.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli",
+      "Kichik Porsiya"
+    ],
+    "description": "Ixcham lavash, erigan pishloq qo‘shilgan holda.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Erigan pishloq",
+      "Sabzavotlar"
+    ],
+    "nutrition": {
+      "protein": "-",
+      "carbs": "-",
+      "fat": "-",
+      "sodium": "-"
+    },
+    "customOptions": [],
+    "ru": {
+      "subtitle": "Маленький Лаваш с Сыром",
+      "description": "Компактный лаваш с добавлением плавленого сыра.",
+      "tags": [
+        "Говядина",
+        "С Сыром",
+        "Маленькая Порция"
+      ],
+      "badge": null,
+      "ingredients": [
+        "Говядина",
+        "Плавленый сыр",
+        "Овощи"
+      ]
+    }
+  },
+  {
+    "id": "lavash-cheese",
+    "name": "L Cheese",
+    "subtitle": "Pishloqli Lavash",
+    "category": "lavash",
+    "price": 43000,
+    "priceDisplay": "43 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 0,
+    "cookTime": "8-10 daq",
+    "calories": "-",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749023480163427513.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli"
+    ],
+    "description": "Mo‘l-ko‘l erigan pishloq qo‘shilgan, mazali lavash.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Erigan pishloq",
+      "Sabzavotlar",
+      "Firmaviy sous"
+    ],
+    "nutrition": {
+      "protein": "-",
+      "carbs": "-",
+      "fat": "-",
+      "sodium": "-"
+    },
+    "customOptions": [],
+    "ru": {
+      "subtitle": "Лаваш с Сыром",
+      "description": "Мягкий лаваш с обильным плавленым сыром.",
+      "tags": [
+        "Говядина",
+        "С Сыром"
+      ],
+      "badge": null,
+      "ingredients": [
+        "Говядина",
+        "Плавленый сыр",
+        "Овощи",
+        "Фирменный соус"
+      ]
+    }
+  },
+  {
+    "id": "lavash-big-cheese",
+    "name": "L Big Cheese",
+    "subtitle": "Katta Pishloqli Lavash",
+    "category": "lavash",
+    "price": 48000,
+    "priceDisplay": "48 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 0,
+    "cookTime": "8-10 daq",
+    "calories": "-",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749023480163427513.webp",
+    "featured": true,
+    "badge": "ENG MASHHUR",
+    "tags": [
+      "Mol go‘shti",
+      "Pishloqli",
+      "Katta Porsiya"
+    ],
+    "description": "Katta o‘lchamdagi lavash, mo‘l-ko‘l go‘sht va erigan pishloq bilan.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Erigan pishloq",
+      "Sabzavotlar",
+      "Firmaviy sous"
+    ],
+    "nutrition": {
+      "protein": "-",
+      "carbs": "-",
+      "fat": "-",
+      "sodium": "-"
+    },
+    "customOptions": [],
+    "ru": {
+      "subtitle": "Большой Лаваш с Сыром",
+      "description": "Лаваш большого размера с обильным мясом и плавленым сыром.",
+      "tags": [
+        "Говядина",
+        "С Сыром",
+        "Большая Порция"
+      ],
+      "badge": "САМЫЙ ПОПУЛЯРНЫЙ",
+      "ingredients": [
+        "Говядина",
+        "Плавленый сыр",
+        "Овощи",
+        "Фирменный соус"
+      ]
+    }
+  },
+  {
+    "id": "mb-donar-bolshoi",
+    "name": "Donar Katta",
+    "subtitle": "Katta O‘lchamdagi Mol Go‘shtli Donar",
+    "category": "donar",
+    "price": 39000,
+    "priceDisplay": "39 000 so‘m",
+    "rating": 4.74,
+    "reviewsCount": 82,
+    "cookTime": "8-10 daq",
+    "calories": "680 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749026810257817913.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Katta Porsiya"
+    ],
+    "description": "Yupqa qatlamlarda qovurilgan mol go‘shti, yangi sabzavotlar va sous bilan lavashga o‘ralgan.",
+    "ingredients": [
+      "Mol go‘shti (dönər)",
+      "Lavash",
+      "Sabzavotlar",
+      "Firmaviy sous"
+    ],
+    "nutrition": {
+      "protein": "28g",
+      "carbs": "50g",
+      "fat": "30g",
+      "sodium": "740mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говядина (донар)",
+        "Лаваш",
+        "Овощи",
+        "Фирменный соус"
+      ],
+      "subtitle": "Большой Донар с Говядиной",
+      "description": "Тонко обжаренная говядина, свежие овощи и фирменный соус, завёрнутые в лаваш.",
+      "tags": [
+        "Говядина",
+        "Большая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-donar-mini",
+    "name": "Donar Mini",
+    "subtitle": "Kichik O‘lchamdagi Mol Go‘shtli Donar",
+    "category": "donar",
+    "price": 34000,
+    "priceDisplay": "34 000 so‘m",
+    "rating": 4.79,
+    "reviewsCount": 334,
+    "cookTime": "7-9 daq",
+    "calories": "520 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749026821012217609.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Kichik Porsiya"
+    ],
+    "description": "Mol go‘shtli donarning ixcham versiyasi, tezkor tamaddi uchun qulay.",
+    "ingredients": [
+      "Mol go‘shti (dönər)",
+      "Lavash",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "22g",
+      "carbs": "40g",
+      "fat": "23g",
+      "sodium": "600mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говядина (донар)",
+        "Лаваш",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Малый Донар с Говядиной",
+      "description": "Компактная версия говяжьего донара — удобно для быстрого перекуса.",
+      "tags": [
+        "Говядина",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-donar-kurinyi-bolshoi",
+    "name": "Donar Tovuqli Katta",
+    "subtitle": "Katta O‘lchamdagi Tovuqli Donar",
+    "category": "donar",
+    "price": 34000,
+    "priceDisplay": "34 000 so‘m",
+    "rating": 4.55,
+    "reviewsCount": 253,
+    "cookTime": "8-10 daq",
+    "calories": "600 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749026865548763628.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Katta Porsiya"
+    ],
+    "description": "Yupqa qatlamlarda qovurilgan tovuq go‘shti, sabzavotlar va sous bilan.",
+    "ingredients": [
+      "Tovuq go‘shti (dönər)",
+      "Lavash",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "26g",
+      "carbs": "48g",
+      "fat": "24g",
+      "sodium": "680mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица (донар)",
+        "Лаваш",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Большой Донар с Курицей",
+      "description": "Тонко обжаренная курица с овощами и соусом.",
+      "tags": [
+        "Курица",
+        "Большая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-donar-kurinyi-mini",
+    "name": "Donar Tovuqli Mini",
+    "subtitle": "Kichik O‘lchamdagi Tovuqli Donar",
+    "category": "donar",
+    "price": 30000,
+    "priceDisplay": "30 000 so‘m",
+    "rating": 4.53,
+    "reviewsCount": 210,
+    "cookTime": "7-9 daq",
+    "calories": "460 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749026870605979760.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Kichik Porsiya"
+    ],
+    "description": "Tovuqli donarning ixcham, yengil versiyasi.",
+    "ingredients": [
+      "Tovuq go‘shti (dönər)",
+      "Lavash",
+      "Sabzavotlar"
+    ],
+    "nutrition": {
+      "protein": "20g",
+      "carbs": "38g",
+      "fat": "18g",
+      "sodium": "540mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица (донар)",
+        "Лаваш",
+        "Овощи"
+      ],
+      "subtitle": "Малый Донар с Курицей",
+      "description": "Лёгкая компактная версия куриного донара.",
+      "tags": [
+        "Курица",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-shaurma",
+    "name": "Shaurma",
+    "subtitle": "Klassik Mol Go‘shtli Shaurma",
+    "category": "donar",
+    "price": 39000,
+    "priceDisplay": "39 000 so‘m",
+    "rating": 4.83,
+    "reviewsCount": 245,
+    "cookTime": "8-10 daq",
+    "calories": "640 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749026928648304564.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Klassik"
+    ],
+    "description": "Yupqa lavashga o‘ralgan mol go‘shti, yangi sabzavotlar va maxsus sous.",
+    "ingredients": [
+      "Mol go‘shti",
+      "Lavash",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "27g",
+      "carbs": "49g",
+      "fat": "27g",
+      "sodium": "700mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говядина",
+        "Лаваш",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Классическая Шаурма с Говядиной",
+      "description": "Говядина, свежие овощи и фирменный соус в тонком лаваше.",
+      "tags": [
+        "Говядина",
+        "Классика"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-shaurma-ekstra",
+    "name": "Shaurma Ekstra",
+    "subtitle": "Ko‘proq Go‘shtli Shaurma",
+    "category": "donar",
+    "price": 45000,
+    "priceDisplay": "45 000 so‘m",
+    "rating": 4.73,
+    "reviewsCount": 95,
+    "cookTime": "8-10 daq",
+    "calories": "760 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749026935357496615.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Ekstra Porsiya"
+    ],
+    "description": "Odatdagidan ko‘proq mol go‘shti bilan to‘ldirilgan mazali shaurma.",
+    "ingredients": [
+      "Mol go‘shti (qo‘shimcha)",
+      "Lavash",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "34g",
+      "carbs": "50g",
+      "fat": "33g",
+      "sodium": "780mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говядина (доп. порция)",
+        "Лаваш",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Шаурма с Двойной Порцией Мяса",
+      "description": "Больше говядины, чем обычно — сытная шаурма.",
+      "tags": [
+        "Говядина",
+        "Экстра Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-shaurma-kurinaia",
+    "name": "Shaurma Tovuqli",
+    "subtitle": "Klassik Tovuqli Shaurma",
+    "category": "donar",
+    "price": 32000,
+    "priceDisplay": "32 000 so‘m",
+    "rating": 4.52,
+    "reviewsCount": 176,
+    "cookTime": "7-9 daq",
+    "calories": "560 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027000796392550.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Klassik"
+    ],
+    "description": "Yumshoq tovuq go‘shti, yangi sabzavotlar va sous bilan yupqa lavashga o‘ralgan.",
+    "ingredients": [
+      "Tovuq go‘shti",
+      "Lavash",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "24g",
+      "carbs": "47g",
+      "fat": "21g",
+      "sodium": "640mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица",
+        "Лаваш",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Классическая Шаурма с Курицей",
+      "description": "Нежная курица, свежие овощи и соус в тонком лаваше.",
+      "tags": [
+        "Курица",
+        "Классика"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-shaurma-kurinaia-ekstra",
+    "name": "Shaurma Tovuqli Ekstra",
+    "subtitle": "Ko‘proq Go‘shtli Tovuqli Shaurma",
+    "category": "donar",
+    "price": 38000,
+    "priceDisplay": "38 000 so‘m",
+    "rating": 4.81,
+    "reviewsCount": 100,
+    "cookTime": "7-9 daq",
+    "calories": "660 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027007962541422.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Ekstra Porsiya"
+    ],
+    "description": "Qo‘shimcha tovuq go‘shti bilan to‘ldirilgan, yanada to‘yimli shaurma.",
+    "ingredients": [
+      "Tovuq go‘shti (qo‘shimcha)",
+      "Lavash",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "29g",
+      "carbs": "48g",
+      "fat": "25g",
+      "sodium": "690mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица (доп. порция)",
+        "Лаваш",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Шаурма с Двойной Порцией Курицы",
+      "description": "Дополнительная порция курицы для более сытной шаурмы.",
+      "tags": [
+        "Курица",
+        "Экстра Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-naggetsy-5",
+    "name": "Naggetsy 5 dona",
+    "subtitle": "Qarsildoq Tovuq Naggetslari",
+    "category": "chicken",
+    "price": 15000,
+    "priceDisplay": "15 000 so‘m",
+    "rating": 4.84,
+    "reviewsCount": 111,
+    "cookTime": "6-8 daq",
+    "calories": "260 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027059457916223.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Qarsildoq"
+    ],
+    "description": "Qarsildoq panirovkada qovurilgan yumshoq tovuq go‘shti bo‘laklari, sous bilan xizmat qilinadi.",
+    "ingredients": [
+      "Tovuq go‘shti",
+      "Qarsildoq panirovka"
+    ],
+    "nutrition": {
+      "protein": "14g",
+      "carbs": "16g",
+      "fat": "15g",
+      "sodium": "420mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица",
+        "Хрустящая панировка"
+      ],
+      "subtitle": "Хрустящие Куриные Наггетсы",
+      "description": "Нежные кусочки курицы в хрустящей панировке, подаются с соусом.",
+      "tags": [
+        "Курица",
+        "Хрустящее"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-naggetsy-8",
+    "name": "Naggetsy 8 dona",
+    "subtitle": "Qarsildoq Tovuq Naggetslari (Katta Porsiya)",
+    "category": "chicken",
+    "price": 20000,
+    "priceDisplay": "20 000 so‘m",
+    "rating": 4.65,
+    "reviewsCount": 292,
+    "cookTime": "6-8 daq",
+    "calories": "410 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027067943287852.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Qarsildoq"
+    ],
+    "description": "8 dona qarsildoq tovuq naggetsi, ideal ulashish yoki to‘yib ovqatlanish uchun.",
+    "ingredients": [
+      "Tovuq go‘shti",
+      "Qarsildoq panirovka"
+    ],
+    "nutrition": {
+      "protein": "22g",
+      "carbs": "25g",
+      "fat": "24g",
+      "sodium": "660mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица",
+        "Хрустящая панировка"
+      ],
+      "subtitle": "Куриные Наггетсы (Большая Порция)",
+      "description": "8 хрустящих наггетсов — отлично для перекуса или на компанию.",
+      "tags": [
+        "Курица",
+        "Хрустящее"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-naggetsy-15",
+    "name": "Naggetsy 15 dona",
+    "subtitle": "Katta Porsiyadagi Tovuq Naggetslari",
+    "category": "chicken",
+    "price": 36000,
+    "priceDisplay": "36 000 so‘m",
+    "rating": 4.75,
+    "reviewsCount": 246,
+    "cookTime": "7-9 daq",
+    "calories": "760 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027074858982114.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Ulashish Uchun"
+    ],
+    "description": "15 dona qarsildoq naggets — do‘stlar yoki oila davrasi uchun ideal tanlov.",
+    "ingredients": [
+      "Tovuq go‘shti",
+      "Qarsildoq panirovka"
+    ],
+    "nutrition": {
+      "protein": "40g",
+      "carbs": "46g",
+      "fat": "44g",
+      "sodium": "1200mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица",
+        "Хрустящая панировка"
+      ],
+      "subtitle": "Наггетсы в Большой Порции",
+      "description": "15 хрустящих наггетсов — идеально для друзей или семьи.",
+      "tags": [
+        "Курица",
+        "На Компанию"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-stripsy-3",
+    "name": "Stripsy 3 dona",
+    "subtitle": "Qarsildoq Tovuq Stripslari",
+    "category": "chicken",
+    "price": 18000,
+    "priceDisplay": "18 000 so‘m",
+    "rating": 4.57,
+    "reviewsCount": 241,
+    "cookTime": "6-8 daq",
+    "calories": "320 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027142873988559.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Qarsildoq"
+    ],
+    "description": "Yumshoq tovuq filesidan tayyorlangan qarsildoq stripslar.",
+    "ingredients": [
+      "Tovuq filesi",
+      "Qarsildoq panirovka"
+    ],
+    "nutrition": {
+      "protein": "18g",
+      "carbs": "18g",
+      "fat": "19g",
+      "sodium": "480mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Куриное филе",
+        "Хрустящая панировка"
+      ],
+      "subtitle": "Хрустящие Куриные Стрипсы",
+      "description": "Стрипсы из нежного куриного филе в хрустящей панировке.",
+      "tags": [
+        "Курица",
+        "Хрустящее"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-stripsy-5",
+    "name": "Stripsy 5 dona",
+    "subtitle": "Qarsildoq Tovuq Stripslari (O‘rta Porsiya)",
+    "category": "chicken",
+    "price": 29000,
+    "priceDisplay": "29 000 so‘m",
+    "rating": 4.58,
+    "reviewsCount": 196,
+    "cookTime": "7-9 daq",
+    "calories": "520 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027148427446677.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Qarsildoq"
+    ],
+    "description": "5 dona qarsildoq tovuq stripsi, mazali sous bilan birga.",
+    "ingredients": [
+      "Tovuq filesi",
+      "Qarsildoq panirovka"
+    ],
+    "nutrition": {
+      "protein": "29g",
+      "carbs": "28g",
+      "fat": "30g",
+      "sodium": "760mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Куриное филе",
+        "Хрустящая панировка"
+      ],
+      "subtitle": "Куриные Стрипсы (Средняя Порция)",
+      "description": "5 хрустящих стрипсов с вкусным соусом.",
+      "tags": [
+        "Курица",
+        "Хрустящее"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-stripsy-8",
+    "name": "Stripsy 8 dona",
+    "subtitle": "Qarsildoq Tovuq Stripslari (Katta Porsiya)",
+    "category": "chicken",
+    "price": 43000,
+    "priceDisplay": "43 000 so‘m",
+    "rating": 4.78,
+    "reviewsCount": 96,
+    "cookTime": "8-10 daq",
+    "calories": "820 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027154423804047.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Ulashish Uchun"
+    ],
+    "description": "8 dona qarsildoq tovuq stripsi — ulashish uchun mukammal tanlov.",
+    "ingredients": [
+      "Tovuq filesi",
+      "Qarsildoq panirovka"
+    ],
+    "nutrition": {
+      "protein": "45g",
+      "carbs": "44g",
+      "fat": "46g",
+      "sodium": "1180mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Куриное филе",
+        "Хрустящая панировка"
+      ],
+      "subtitle": "Куриные Стрипсы (Большая Порция)",
+      "description": "8 хрустящих стрипсов — отличный выбор для компании.",
+      "tags": [
+        "Курица",
+        "На Компанию"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-longer",
+    "name": "Longer",
+    "subtitle": "Klassik Uzun Hot-dog",
+    "category": "hotdogs",
+    "price": 28000,
+    "priceDisplay": "28 000 so‘m",
+    "rating": 4.74,
+    "reviewsCount": 147,
+    "cookTime": "5-7 daq",
+    "calories": "420 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027232339791152.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Hot-dog",
+      "Klassik"
+    ],
+    "description": "Sochli sosiska, qarsildoq bulochka va sous bilan tayyorlangan klassik hot-dog.",
+    "ingredients": [
+      "Sosiska",
+      "Uzun bulochka",
+      "Ketchup va gorchitsa"
+    ],
+    "nutrition": {
+      "protein": "14g",
+      "carbs": "34g",
+      "fat": "24g",
+      "sodium": "780mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Сосиска",
+        "Длинная булочка",
+        "Кетчуп и горчица"
+      ],
+      "subtitle": "Классический Длинный Хот-дог",
+      "description": "Сочная сосиска, хрустящая булочка и соус — классический хот-дог.",
+      "tags": [
+        "Хот-дог",
+        "Классика"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-khaggi-sendvich",
+    "name": "Xaggi Sendvich",
+    "subtitle": "Mol Go‘shtli Xaggi Sendvich",
+    "category": "hotdogs",
+    "price": 45000,
+    "priceDisplay": "45 000 so‘m",
+    "rating": 4.71,
+    "reviewsCount": 185,
+    "cookTime": "8-10 daq",
+    "calories": "640 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027288993759290.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "To‘yimli"
+    ],
+    "description": "Sochli mol go‘shti kotleti, yangi sabzavotlar va sous bilan to‘yimli sendvich.",
+    "ingredients": [
+      "Mol go‘shti kotleti",
+      "Sendvich noni",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "28g",
+      "carbs": "48g",
+      "fat": "30g",
+      "sodium": "720mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета",
+        "Хлеб для сэндвича",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Сэндвич с Говядиной Хагги",
+      "description": "Сочная говяжья котлета, свежие овощи и соус в сытном сэндвиче.",
+      "tags": [
+        "Говядина",
+        "Сытно"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-khaggi-kurinyi",
+    "name": "Xaggi Tovuqli",
+    "subtitle": "Tovuqli Xaggi Sendvich",
+    "category": "hotdogs",
+    "price": 36000,
+    "priceDisplay": "36 000 so‘m",
+    "rating": 4.57,
+    "reviewsCount": 254,
+    "cookTime": "7-9 daq",
+    "calories": "540 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027354442571801.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Qarsildoq"
+    ],
+    "description": "Qarsildoq tovuq kotleti, sabzavotlar va sous bilan tayyorlangan sendvich.",
+    "ingredients": [
+      "Tovuq kotleti",
+      "Sendvich noni",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "24g",
+      "carbs": "46g",
+      "fat": "24g",
+      "sodium": "660mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Куриная котлета",
+        "Хлеб для сэндвича",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Сэндвич с Курицей Хагги",
+      "description": "Хрустящая куриная котлета, овощи и соус в сэндвиче.",
+      "tags": [
+        "Курица",
+        "Хрустящее"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-mini-sendvich",
+    "name": "Mini Sendvich",
+    "subtitle": "Mol Go‘shtli Mini Sendvich",
+    "category": "hotdogs",
+    "price": 29000,
+    "priceDisplay": "29 000 so‘m",
+    "rating": 4.61,
+    "reviewsCount": 172,
+    "cookTime": "6-8 daq",
+    "calories": "420 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027433037280876.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Mol go‘shti",
+      "Kichik Porsiya"
+    ],
+    "description": "Ixcham o‘lchamdagi, tezkor tamaddi uchun qulay mol go‘shtli sendvich.",
+    "ingredients": [
+      "Mol go‘shti kotleti",
+      "Mini non",
+      "Sabzavotlar",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "18g",
+      "carbs": "32g",
+      "fat": "20g",
+      "sodium": "500mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Говяжья котлета",
+        "Мини-хлеб",
+        "Овощи",
+        "Соус"
+      ],
+      "subtitle": "Мини-Сэндвич с Говядиной",
+      "description": "Компактный говяжий сэндвич — удобно для быстрого перекуса.",
+      "tags": [
+        "Говядина",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-mini-sendvich-kurinyi",
+    "name": "Mini Sendvich Tovuqli",
+    "subtitle": "Tovuqli Mini Sendvich",
+    "category": "hotdogs",
+    "price": 24000,
+    "priceDisplay": "24 000 so‘m",
+    "rating": 4.77,
+    "reviewsCount": 88,
+    "cookTime": "6-8 daq",
+    "calories": "360 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027538380657001.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Kichik Porsiya"
+    ],
+    "description": "Yengil va mazali, tovuq go‘shtidan tayyorlangan mini sendvich.",
+    "ingredients": [
+      "Tovuq kotleti",
+      "Mini non",
+      "Sabzavotlar"
+    ],
+    "nutrition": {
+      "protein": "15g",
+      "carbs": "30g",
+      "fat": "16g",
+      "sodium": "460mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Куриная котлета",
+        "Мини-хлеб",
+        "Овощи"
+      ],
+      "subtitle": "Мини-Сэндвич с Курицей",
+      "description": "Лёгкий и вкусный мини-сэндвич с курицей.",
+      "tags": [
+        "Курица",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-klab-sendvich",
+    "name": "Klab Sendvich",
+    "subtitle": "Ko‘p Qatlamli Klub Sendvich",
+    "category": "hotdogs",
+    "price": 41000,
+    "priceDisplay": "41 000 so‘m",
+    "rating": 4.59,
+    "reviewsCount": 76,
+    "cookTime": "8-10 daq",
+    "calories": "590 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027568082010949.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Tovuq",
+      "Ko‘p Qatlamli"
+    ],
+    "description": "Tovuq go‘shti, bekon, sabzavotlar va sous bilan ko‘p qatlamli to‘yimli sendvich.",
+    "ingredients": [
+      "Tovuq go‘shti",
+      "Bekon",
+      "Sabzavotlar",
+      "Tost non",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "27g",
+      "carbs": "42g",
+      "fat": "29g",
+      "sodium": "740mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Курица",
+        "Бекон",
+        "Овощи",
+        "Тост-хлеб",
+        "Соус"
+      ],
+      "subtitle": "Многослойный Клаб-Сэндвич",
+      "description": "Курица, бекон, овощи и соус в многослойном сытном сэндвиче.",
+      "tags": [
+        "Курица",
+        "Многослойный"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-khot-dog-kanadskii",
+    "name": "Xot-dog Kanadcha",
+    "subtitle": "Klassik Kanada Uslubidagi Hot-dog",
+    "category": "hotdogs",
+    "price": 17000,
+    "priceDisplay": "17 000 so‘m",
+    "rating": 4.82,
+    "reviewsCount": 265,
+    "cookTime": "5-7 daq",
+    "calories": "360 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027602417802243.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Hot-dog",
+      "Klassik"
+    ],
+    "description": "Sochli sosiska va klassik souslar bilan tayyorlangan an’anaviy hot-dog.",
+    "ingredients": [
+      "Sosiska",
+      "Bulochka",
+      "Ketchup va gorchitsa"
+    ],
+    "nutrition": {
+      "protein": "11g",
+      "carbs": "28g",
+      "fat": "20g",
+      "sodium": "680mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Сосиска",
+        "Булочка",
+        "Кетчуп и горчица"
+      ],
+      "subtitle": "Классический Хот-дог по-Канадски",
+      "description": "Сочная сосиска с классическими соусами — традиционный хот-дог.",
+      "tags": [
+        "Хот-дог",
+        "Классика"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-khot-dog-s-syrom",
+    "name": "Xot-dog Pishloqli",
+    "subtitle": "Erigan Pishloqli Hot-dog",
+    "category": "hotdogs",
+    "price": 20000,
+    "priceDisplay": "20 000 so‘m",
+    "rating": 4.61,
+    "reviewsCount": 168,
+    "cookTime": "5-7 daq",
+    "calories": "420 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027636432154322.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Hot-dog",
+      "Pishloqli"
+    ],
+    "description": "Klassik hot-dog ustiga mo‘l-ko‘l erigan pishloq qo‘shilgan.",
+    "ingredients": [
+      "Sosiska",
+      "Erigan pishloq",
+      "Bulochka",
+      "Sous"
+    ],
+    "nutrition": {
+      "protein": "14g",
+      "carbs": "29g",
+      "fat": "24g",
+      "sodium": "740mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Сосиска",
+        "Плавленый сыр",
+        "Булочка",
+        "Соус"
+      ],
+      "subtitle": "Хот-дог с Плавленым Сыром",
+      "description": "Классический хот-дог с обильным плавленым сыром.",
+      "tags": [
+        "Хот-дог",
+        "С Сыром"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-khot-dog-korolevskii",
+    "name": "Xot-dog Qirollik",
+    "subtitle": "Katta Porsiyadagi Maxsus Hot-dog",
+    "category": "hotdogs",
+    "price": 30000,
+    "priceDisplay": "30 000 so‘m",
+    "rating": 4.87,
+    "reviewsCount": 221,
+    "cookTime": "6-8 daq",
+    "calories": "540 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027675724797780.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Hot-dog",
+      "Maxsus"
+    ],
+    "description": "Katta sosiska, qo‘shimcha sous va sabzavotlar bilan to‘yimli maxsus hot-dog.",
+    "ingredients": [
+      "Katta sosiska",
+      "Bulochka",
+      "Sabzavotlar",
+      "Maxsus sous"
+    ],
+    "nutrition": {
+      "protein": "18g",
+      "carbs": "36g",
+      "fat": "30g",
+      "sodium": "820mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Большая сосиска",
+        "Булочка",
+        "Овощи",
+        "Фирменный соус"
+      ],
+      "subtitle": "Особый Хот-дог Большой Порции",
+      "description": "Большая сосиска, дополнительный соус и овощи — сытный особый хот-дог.",
+      "tags": [
+        "Хот-дог",
+        "Особое"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-kartofel-po-derevenski",
+    "name": "Kartoshka Qishloqcha",
+    "subtitle": "Qishloqcha Uslubdagi Kartoshka",
+    "category": "sides",
+    "price": 21000,
+    "priceDisplay": "21 000 so‘m",
+    "rating": 4.59,
+    "reviewsCount": 315,
+    "cookTime": "6-8 daq",
+    "calories": "320 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027715871854180.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Kartoshka",
+      "Qarsildoq"
+    ],
+    "description": "Ziravorlar bilan qovurilgan qarsildoq qishloqcha kartoshka bo‘laklari.",
+    "ingredients": [
+      "Kartoshka",
+      "Ziravorlar",
+      "O‘simlik moyi"
+    ],
+    "nutrition": {
+      "protein": "4g",
+      "carbs": "42g",
+      "fat": "15g",
+      "sodium": "380mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Картофель",
+        "Специи",
+        "Растительное масло"
+      ],
+      "subtitle": "Картофель по-Деревенски",
+      "description": "Хрустящие дольки картофеля, обжаренные со специями.",
+      "tags": [
+        "Картофель",
+        "Хрустящее"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-kartofel-fri",
+    "name": "Kartoshka Fri",
+    "subtitle": "Klassik Qarsildoq Kartoshka Fri",
+    "category": "sides",
+    "price": 20000,
+    "priceDisplay": "20 000 so‘m",
+    "rating": 4.66,
+    "reviewsCount": 294,
+    "cookTime": "5-7 daq",
+    "calories": "340 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027744477667972.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Kartoshka",
+      "Klassik"
+    ],
+    "description": "Oltin rangda qovurilgan, qarsildoq klassik kartoshka fri.",
+    "ingredients": [
+      "Kartoshka",
+      "Tuz",
+      "O‘simlik moyi"
+    ],
+    "nutrition": {
+      "protein": "4g",
+      "carbs": "44g",
+      "fat": "16g",
+      "sodium": "360mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Картофель",
+        "Соль",
+        "Растительное масло"
+      ],
+      "subtitle": "Классический Хрустящий Картофель Фри",
+      "description": "Золотистый, хрустящий классический картофель фри.",
+      "tags": [
+        "Картофель",
+        "Классика"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-kartofel-fri-mini",
+    "name": "Kartoshka Fri Mini",
+    "subtitle": "Kichik Porsiyadagi Kartoshka Fri",
+    "category": "sides",
+    "price": 13000,
+    "priceDisplay": "13 000 so‘m",
+    "rating": 4.56,
+    "reviewsCount": 131,
+    "cookTime": "5-7 daq",
+    "calories": "220 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027785913378695.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Kartoshka",
+      "Kichik Porsiya"
+    ],
+    "description": "Klassik kartoshka frining ixcham porsiyasi.",
+    "ingredients": [
+      "Kartoshka",
+      "Tuz",
+      "O‘simlik moyi"
+    ],
+    "nutrition": {
+      "protein": "3g",
+      "carbs": "28g",
+      "fat": "10g",
+      "sodium": "230mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Картофель",
+        "Соль",
+        "Растительное масло"
+      ],
+      "subtitle": "Картофель Фри Маленькой Порции",
+      "description": "Компактная порция классического картофеля фри.",
+      "tags": [
+        "Картофель",
+        "Маленькая Порция"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-sous-firmennyi",
+    "name": "Firmaviy Sous",
+    "subtitle": "Maxsus Firmaviy Sous",
+    "category": "sides",
+    "price": 3000,
+    "priceDisplay": "3 000 so‘m",
+    "rating": 4.6,
+    "reviewsCount": 335,
+    "cookTime": "-",
+    "calories": "90 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027980780211948.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Sous",
+      "Firmaviy"
+    ],
+    "description": "Mix Burgerning o‘ziga xos maxsus retsepti asosidagi firmaviy sous.",
+    "ingredients": [
+      "Maxsus retsept aralashmasi"
+    ],
+    "nutrition": {
+      "protein": "0g",
+      "carbs": "2g",
+      "fat": "9g",
+      "sodium": "140mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Смесь по фирменному рецепту"
+      ],
+      "subtitle": "Особый Фирменный Соус",
+      "description": "Фирменный соус по особому рецепту Mix Burger.",
+      "tags": [
+        "Соус",
+        "Фирменный"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-sous-syrnyi",
+    "name": "Pishloqli Sous",
+    "subtitle": "Qaymoqli Pishloqli Sous",
+    "category": "sides",
+    "price": 4000,
+    "priceDisplay": "4 000 so‘m",
+    "rating": 4.61,
+    "reviewsCount": 279,
+    "cookTime": "-",
+    "calories": "110 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027928763927054.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Sous",
+      "Pishloqli"
+    ],
+    "description": "Qaymoqli va boy ta’mli pishloqli sous.",
+    "ingredients": [
+      "Pishloq",
+      "Qaymoq"
+    ],
+    "nutrition": {
+      "protein": "2g",
+      "carbs": "3g",
+      "fat": "10g",
+      "sodium": "200mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Сыр",
+        "Сливки"
+      ],
+      "subtitle": "Сливочный Сырный Соус",
+      "description": "Насыщенный сливочный соус с сыром.",
+      "tags": [
+        "Соус",
+        "С Сыром"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-ketchup",
+    "name": "Ketchup",
+    "subtitle": "Klassik Pomidor Ketchupi",
+    "category": "sides",
+    "price": 4000,
+    "priceDisplay": "4 000 so‘m",
+    "rating": 4.86,
+    "reviewsCount": 264,
+    "cookTime": "-",
+    "calories": "40 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749027874079807007.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Sous",
+      "Klassik"
+    ],
+    "description": "Klassik pomidorli ketchup sousi.",
+    "ingredients": [
+      "Pomidor",
+      "Ziravorlar"
+    ],
+    "nutrition": {
+      "protein": "0g",
+      "carbs": "9g",
+      "fat": "0g",
+      "sodium": "180mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Помидор",
+        "Специи"
+      ],
+      "subtitle": "Классический Томатный Кетчуп",
+      "description": "Классический томатный соус кетчуп.",
+      "tags": [
+        "Соус",
+        "Классика"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-sous-chesnochnyi",
+    "name": "Sarimsoqli Sous",
+    "subtitle": "Xushbo‘y Sarimsoqli Sous",
+    "category": "sides",
+    "price": 4000,
+    "priceDisplay": "4 000 so‘m",
+    "rating": 4.64,
+    "reviewsCount": 130,
+    "cookTime": "-",
+    "calories": "100 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749028055845905398.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Sous",
+      "Sarimsoqli"
+    ],
+    "description": "Xushbo‘y sarimsoq ta’miga ega qaymoqli sous.",
+    "ingredients": [
+      "Sarimsoq",
+      "Qaymoqli asos"
+    ],
+    "nutrition": {
+      "protein": "0g",
+      "carbs": "2g",
+      "fat": "10g",
+      "sodium": "160mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Чеснок",
+        "Сливочная основа"
+      ],
+      "subtitle": "Ароматный Чесночный Соус",
+      "description": "Сливочный соус с ароматным чесноком.",
+      "tags": [
+        "Соус",
+        "Чесночный"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-sous-barbekiu",
+    "name": "Barbekyu Sousi",
+    "subtitle": "Tutunli Barbekyu Sousi",
+    "category": "sides",
+    "price": 4000,
+    "priceDisplay": "4 000 so‘m",
+    "rating": 4.7,
+    "reviewsCount": 106,
+    "cookTime": "-",
+    "calories": "80 kkal",
+    "spiceLevel": 0,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749028097962344128.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Sous",
+      "Shirin-Tutunli"
+    ],
+    "description": "Shirin va tutunli ta’mga ega barbekyu sousi.",
+    "ingredients": [
+      "Pomidor asosi",
+      "Tutunli ziravorlar"
+    ],
+    "nutrition": {
+      "protein": "0g",
+      "carbs": "14g",
+      "fat": "1g",
+      "sodium": "220mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Томатная основа",
+        "Дымные специи"
+      ],
+      "subtitle": "Дымный Соус Барбекю",
+      "description": "Сладкий соус барбекю с дымным вкусом.",
+      "tags": [
+        "Соус",
+        "Сладко-Дымный"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "mb-khalapeno",
+    "name": "Xalapenyo",
+    "subtitle": "Achchiq Tuzlangan Xalapenyo",
+    "category": "sides",
+    "price": 4000,
+    "priceDisplay": "4 000 so‘m",
+    "rating": 4.8,
+    "reviewsCount": 116,
+    "cookTime": "-",
+    "calories": "15 kkal",
+    "spiceLevel": 2,
+    "image": "https://cdn.zoomda.uz/products/2025/06/04/1749028138844053570.webp",
+    "featured": false,
+    "badge": null,
+    "tags": [
+      "Achchiq 🔥",
+      "Sous"
+    ],
+    "description": "Achchiq ta’m qo‘shish uchun tuzlangan xalapenyo qalampiri bo‘laklari.",
+    "ingredients": [
+      "Xalapenyo qalampiri",
+      "Marinad"
+    ],
+    "nutrition": {
+      "protein": "0g",
+      "carbs": "3g",
+      "fat": "0g",
+      "sodium": "260mg"
+    },
+    "customOptions": [],
+    "ru": {
+      "ingredients": [
+        "Перец халапеньо",
+        "Маринад"
+      ],
+      "subtitle": "Острый Маринованный Халапеньо",
+      "description": "Маринованные кусочки перца халапеньо для остроты.",
+      "tags": [
+        "Острое 🔥",
+        "Соус"
+      ],
+      "badge": null
+    }
+  },
+  {
+    "id": "salted-caramel-shake",
+    "name": "Dudlangan Karamelli Sheyk",
+    "subtitle": "Madagaskar Vanili va Kuydirilgan Zefir",
+    "category": "drinks",
+    "price": 65000,
+    "priceDisplay": "65 000 so‘m",
+    "rating": 4.98,
+    "reviewsCount": 380,
+    "cookTime": "5 daq",
+    "calories": "540 kkal",
+    "spiceLevel": 0,
+    "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+    "featured": false,
+    "badge": "XODIMLAR TANLOVI",
+    "tags": [
+      "Sheyk",
+      "Tuzli Karamel",
+      "Dudlangan Tuz"
+    ],
+    "description": "Madagaskar vanili qaymog‘i, dudlangan tuzli karamel chiziqlari, ustida olovda yengil kuydirilgan shirin zefir kremi, qora shokolad donachalari va Maldon dengiz tuzi.",
+    "ingredients": [
+      "Madagaskar vanilli quyuq muzqaymoq kremi",
+      "Dudlangan xonaki tuzli karamel",
+      "Olovda kuydirilgan marshmallow kremi",
+      "Valrhona qora shokolad marvaridlari",
+      "Maldon dudlangan dengiz tuzi bo‘laklari"
+    ],
+    "nutrition": {
+      "protein": "10g",
+      "carbs": "68g",
+      "fat": "26g",
+      "sodium": "320mg"
+    },
+    "customOptions": [
+      {
+        "name": "Espresso qahvasi qo‘shish",
+        "price": 12000
+      },
+      {
+        "name": "Qo‘shimcha kuydirilgan zefir",
+        "price": 15000
+      }
+    ],
+    "ru": {
+      "ingredients": [
+        "Перец халапеньо",
+        "Маринад"
+      ],
+      "subtitle": "Мадагаскарская Ваниль и Жжёный Зефир",
+      "description": "Крем на мадагаскарской ванили, полоски копчёной солёной карамели, слегка обожжённый сладкий зефирный крем, кусочки тёмного шоколада и морская соль Малдон.",
+      "tags": [
+        "Шейк",
+        "Солёная Карамель",
+        "Копчёная Соль"
+      ],
+      "badge": "ВЫБОР ПЕРСОНАЛА"
+    }
+  },
+  {
+    "id": "yuzu-sparkling-soda",
+    "name": "Dudlangan Yuzu va Rozmarin Limonadi",
+    "subtitle": "Yangi Yapon Sitrusi va Kuydirilgan Rozmarin",
+    "category": "drinks",
+    "price": 48000,
+    "priceDisplay": "48 000 so‘m",
+    "rating": 4.9,
+    "reviewsCount": 175,
+    "cookTime": "3 daq",
+    "calories": "110 kkal",
+    "spiceLevel": 0,
+    "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
+    "featured": false,
+    "badge": "TETIKLASHTIRUVCHI",
+    "tags": [
+      "Alkogolsiz",
+      "Kraft Soda",
+      "Sitrus"
+    ],
+    "description": "Sovuq siqilgan yapon yuzu sharbati, kuydirilgan rozmarin siropi, tog‘ buloq gazi va muz bilan tayyorlangan salqin ichimlik.",
+    "ingredients": [
+      "Sovuq siqilgan yapon Yuzu sharbati",
+      "Kuydirilgan rozmarinli qamish siropi",
+      "Tabiiy gazlangan tog‘ bulog‘i suvi",
+      "Meyer limoni qobig‘i va rozmarin shoxi"
+    ],
+    "nutrition": {
+      "protein": "0g",
+      "carbs": "26g",
+      "fat": "0g",
+      "sodium": "15mg"
+    },
+    "customOptions": [
+      {
+        "name": "Zanjabil ta‘mini qo‘shish",
+        "price": 8000
+      },
+      {
+        "name": "Ko‘proq Yuzu sitrusi",
+        "price": 10000
+      }
+    ],
+    "ru": {
+      "ingredients": [
+        "Перец халапеньо",
+        "Маринад"
+      ],
+      "subtitle": "Свежий Японский Цитрус и Жжёный Розмарин",
+      "description": "Освежающий напиток из свежевыжатого японского юдзу, сиропа с жжёным розмарином, газированной родниковой воды и льда.",
+      "tags": [
+        "Безалкогольное",
+        "Крафтовая Газировка",
+        "Цитрус"
+      ],
+      "badge": "ОСВЕЖАЮЩЕЕ"
+    }
+  },
+  {
+    "id": "molten-smores-pie",
+    "name": "Cho‘yanda Pishgan S’mores Tavasi",
+    "subtitle": "Qaynoq Valrhona Shokoladi va Olovli Marshmallow",
+    "category": "desserts",
+    "price": 88000,
+    "priceDisplay": "88 000 so‘m",
+    "rating": 4.96,
+    "reviewsCount": 290,
+    "cookTime": "10 daq",
+    "calories": "620 kkal",
+    "spiceLevel": 0,
+    "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+    "featured": false,
+    "badge": "QAYNOQ TAQDIM ETILADI 🔥",
+    "tags": [
+      "Issiq Desert",
+      "Shokolad",
+      "Zefir"
+    ],
+    "description": "Buyurtma berilganda maxsus kichik cho‘yanda pishiriladi: sariyog‘li pechene ustida qaynoq 70% Valrhona qora shokoladi, olovda qizargan zefir qatlami va dudlangan sutli muzqaymoq koptogi bilan.",
+    "ingredients": [
+      "70% Valrhona quyuq qora shokolad ganashi",
+      "Sariyog‘li mayin pechene asosi",
+      "Olovda qizartirilgan zefir adyoli",
+      "Xonaki dudlangan sutli muzqaymoq"
+    ],
+    "nutrition": {
+      "protein": "8g",
+      "carbs": "74g",
+      "fat": "32g",
+      "sodium": "280mg"
+    },
+    "customOptions": [
+      {
+        "name": "Qo‘shimcha muzqaymoq koptogi",
+        "price": 20000
+      },
+      {
+        "name": "Tuzli karamel sousi",
+        "price": 12000
+      }
+    ],
+    "ru": {
+      "ingredients": [
+        "Перец халапеньо",
+        "Маринад"
+      ],
+      "subtitle": "Горячий Шоколад Valrhona и Обожжённый Зефир",
+      "description": "Готовится на заказ в маленькой чугунной сковороде: горячий тёмный шоколад Valrhona 70% на песочном печенье, слой обожжённого зефира и шарик копчёного молочного мороженого.",
+      "tags": [
+        "Горячий Десерт",
+        "Шоколад",
+        "Зефир"
+      ],
+      "badge": "ПОДАЁТСЯ ГОРЯЧИМ 🔥"
+    }
+  },
+  {
+    "id": "churro-smash-bites",
+    "name": "Dolchinli Oltin Churros Bo‘laklari",
+    "subtitle": "Dudlangan Dulse De Leche va Truffel Shokolad",
+    "category": "desserts",
+    "price": 75000,
+    "priceDisplay": "75 000 so‘m",
+    "rating": 4.91,
+    "reviewsCount": 185,
+    "cookTime": "6 daq",
+    "calories": "490 kkal",
+    "spiceLevel": 0,
+    "image": "https://images.unsplash.com/photo-1624300629298-e9de39c13be5?auto=format&fit=crop&w=800&q=80",
+    "featured": false,
+    "badge": "QARSILDOQ SHIRINLIK",
+    "tags": [
+      "Churros",
+      "Karamel",
+      "Shokolad"
+    ],
+    "description": "Oltin rangda qovurilgan seylon dolchini va jigarrang shakar sepilgan mini churroslar. Issiq dudlangan karamel va qora shokolad souslari bilan birga.",
+    "ingredients": [
+      "Qo‘lda quyilgan oltin qovurilgan churros xamiri",
+      "Seylon dolchini va Demerara shakar kukuni",
+      "Dudlangan xonaki Dulce de Leche karameli",
+      "Achchiq ziravorli qora shokolad sousi"
+    ],
+    "nutrition": {
+      "protein": "5g",
+      "carbs": "62g",
+      "fat": "24g",
+      "sodium": "210mg"
+    },
+    "customOptions": [
+      {
+        "name": "Qo‘shimcha karamel sousi",
+        "price": 12000
+      },
+      {
+        "name": "Qo‘shimcha shokolad sousi",
+        "price": 12000
+      }
+    ],
+    "ru": {
+      "ingredients": [
+        "Перец халапеньо",
+        "Маринад"
+      ],
+      "subtitle": "Копчёное Дульсе де Лече и Трюфельный Шоколад",
+      "description": "Золотистые мини-чуррос, обжаренные до хруста и посыпанные цейлонской корицей и коричневым сахаром. Подаются с горячими соусами: копчёной карамелью и тёмным шоколадом.",
+      "tags": [
+        "Чуррос",
+        "Карамель",
+        "Шоколад"
+      ],
+      "badge": "ХРУСТЯЩАЯ СЛАДОСТЬ"
+    }
+  }
+]
