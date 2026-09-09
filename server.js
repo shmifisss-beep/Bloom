@@ -3,7 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import { Telegraf, Markup } from 'telegraf';
 import { readMenu, updateItem, addItem, deleteItem, getCategories } from './db.js';
-import { mkdirSync, createWriteStream, existsSync } from 'fs';
+import { verifyTelegramWebAppData } from './telegramAuth.js';
+import { mkdirSync, createWriteStream, writeFileSync, existsSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { pipeline } from 'stream/promises';
@@ -53,8 +54,11 @@ if (!existsSync(UPLOADS_DIR)) mkdirSync(UPLOADS_DIR, { recursive: true });
 // ─────────────────────────────────────────────────────────────
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '12mb' })); // larger limit needed for base64 photo uploads
 app.use('/images', express.static(UPLOADS_DIR));
+
+// Admin Mini App static files (the panel UI itself — see public/admin/)
+app.use('/admin', express.static(join(__dirname, 'public', 'admin')));
 
 app.get('/api/menu', (req, res) => {
   res.json(readMenu());
@@ -65,6 +69,142 @@ app.get('/api/menu/categories', (req, res) => {
 });
 
 app.get('/health', (req, res) => res.send('ok'));
+
+// ---- Admin auth middleware for the Mini App ----
+// The Mini App sends Telegram's initData in the Authorization header as:
+//   Authorization: tma <initData>
+// We verify the signature using the bot token, then check the user's
+// Telegram ID is in ADMIN_CHAT_IDS before allowing any write access.
+function requireAdmin(req, res, next) {
+  const authHeader = req.headers['authorization'] || '';
+  const initData = authHeader.startsWith('tma ') ? authHeader.slice(4) : '';
+
+  const result = verifyTelegramWebAppData(initData, BOT_TOKEN);
+  if (!result || !result.user) {
+    return res.status(401).json({ error: 'Invalid or missing Telegram authentication.' });
+  }
+  if (!ADMIN_IDS.includes(result.user.id)) {
+    return res.status(403).json({ error: 'This Telegram account is not an admin.' });
+  }
+  req.telegramUser = result.user;
+  next();
+}
+
+// ---- Admin API: read own identity (used by the Mini App to confirm auth) ----
+app.get('/api/admin/me', requireAdmin, (req, res) => {
+  res.json({ ok: true, user: req.telegramUser });
+});
+
+// ---- Admin API: full menu (same data as public endpoint, kept separate for clarity) ----
+app.get('/api/admin/menu', requireAdmin, (req, res) => {
+  res.json(readMenu());
+});
+
+app.get('/api/admin/categories', requireAdmin, (req, res) => {
+  res.json(getCategories());
+});
+
+// ---- Admin API: update an existing item (price, ingredients, nutrition, featured, etc.) ----
+app.patch('/api/admin/menu/:id', requireAdmin, (req, res) => {
+  const { id } = req.params;
+  const patch = req.body || {};
+
+  // Only allow known, safe fields to be updated from the Mini App.
+  const allowedFields = [
+    'name', 'subtitle', 'category', 'price', 'priceDisplay', 'image',
+    'featured', 'badge', 'tags', 'description', 'ingredients',
+    'nutrition', 'calories', 'spiceLevel'
+  ];
+  const safePatch = {};
+  for (const key of allowedFields) {
+    if (key in patch) safePatch[key] = patch[key];
+  }
+
+  if (safePatch.price !== undefined) {
+    const priceNum = Number(safePatch.price);
+    if (!Number.isFinite(priceNum) || priceNum <= 0) {
+      return res.status(400).json({ error: 'Invalid price.' });
+    }
+    safePatch.price = priceNum;
+    safePatch.priceDisplay = new Intl.NumberFormat('uz-UZ').format(Math.round(priceNum)) + ' so‘m';
+  }
+
+  const updated = updateItem(id, safePatch);
+  if (!updated) return res.status(404).json({ error: 'Item not found.' });
+  res.json(updated);
+});
+
+// ---- Admin API: create a new item ----
+app.post('/api/admin/menu', requireAdmin, (req, res) => {
+  const body = req.body || {};
+  if (!body.name || !body.category || !body.price) {
+    return res.status(400).json({ error: 'name, category and price are required.' });
+  }
+
+  const priceNum = Number(body.price);
+  if (!Number.isFinite(priceNum) || priceNum <= 0) {
+    return res.status(400).json({ error: 'Invalid price.' });
+  }
+
+  const newItem = {
+    id: `admin-${Date.now()}`,
+    name: body.name,
+    subtitle: body.subtitle || '',
+    category: body.category,
+    price: priceNum,
+    priceDisplay: new Intl.NumberFormat('uz-UZ').format(Math.round(priceNum)) + ' so‘m',
+    rating: 4.8,
+    reviewsCount: 0,
+    cookTime: '10 daq',
+    calories: body.calories || '-',
+    spiceLevel: body.spiceLevel || 0,
+    image: body.image || 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80',
+    featured: Boolean(body.featured),
+    badge: body.badge || null,
+    tags: Array.isArray(body.tags) ? body.tags : [],
+    description: body.description || '',
+    ingredients: Array.isArray(body.ingredients) ? body.ingredients : [],
+    nutrition: body.nutrition || { protein: '-', carbs: '-', fat: '-', sodium: '-' },
+    customOptions: [],
+    ru: null
+  };
+
+  addItem(newItem);
+  res.status(201).json(newItem);
+});
+
+// ---- Admin API: delete an item ----
+app.delete('/api/admin/menu/:id', requireAdmin, (req, res) => {
+  const deleted = deleteItem(req.params.id);
+  if (!deleted) return res.status(404).json({ error: 'Item not found.' });
+  res.json({ ok: true });
+});
+
+// ---- Admin API: upload a photo (base64 data URL from the Mini App file picker) ----
+app.post('/api/admin/upload-image', requireAdmin, (req, res) => {
+  try {
+    const { imageBase64 } = req.body || {};
+    if (!imageBase64 || typeof imageBase64 !== 'string' || !imageBase64.startsWith('data:image')) {
+      return res.status(400).json({ error: 'imageBase64 must be a data:image/... base64 string.' });
+    }
+    const match = imageBase64.match(/^data:image\/(png|jpe?g|webp);base64,(.+)$/);
+    if (!match) {
+      return res.status(400).json({ error: 'Unsupported image format. Use PNG, JPG, or WEBP.' });
+    }
+    const ext = match[1] === 'jpeg' ? 'jpg' : match[1];
+    const buffer = Buffer.from(match[2], 'base64');
+    if (buffer.length > 8 * 1024 * 1024) {
+      return res.status(400).json({ error: 'Image too large (max 8MB).' });
+    }
+    const filename = `${Date.now()}-${Math.round(Math.random() * 1e6)}.${ext}`;
+    writeFileSync(join(UPLOADS_DIR, filename), buffer);
+    const url = `${PUBLIC_URL}/images/${filename}`;
+    res.json({ url });
+  } catch (e) {
+    console.error('Upload error:', e.message);
+    res.status(500).json({ error: 'Failed to save image.' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`✅ Menu API running on port ${PORT}`);
@@ -132,6 +272,7 @@ bot.start((ctx) => {
   return ctx.reply(
     `👋 Salom, Admin!\n\nKuroCraft Menyu Boshqaruvi\n\n` +
     `/menu — Menyuni ko‘rish va tahrirlash\n` +
+    `/panel — Boshqaruv panelini ochish (Mini App)\n` +
     `/qoshish — Yangi taom qo‘shish\n` +
     `/bekor — Joriy amalni bekor qilish`
   );
@@ -145,6 +286,22 @@ bot.command('bekor', (ctx) => {
 
 // ---- /menu — show category picker ----
 bot.command('menu', (ctx) => sendCategoryPicker(ctx));
+
+// ---- /panel — open the admin Mini App (web-based panel) ----
+bot.command('panel', (ctx) => {
+  if (!PUBLIC_URL) {
+    return ctx.reply(
+      '⚠️ PUBLIC_URL sozlanmagan, shuning uchun panelni ochib bo‘lmaydi.\n\n' +
+      'Railway → Variables bo‘limida PUBLIC_URL o‘zgaruvchisini o‘rnating (masalan: https://your-app.up.railway.app).'
+    );
+  }
+  return ctx.reply(
+    '🖥 Boshqaruv panelini ochish uchun quyidagi tugmani bosing:',
+    Markup.inlineKeyboard([
+      [Markup.button.webApp('📋 Menyuni Boshqarish', `${PUBLIC_URL}/admin`)]
+    ])
+  );
+});
 
 function categoryKeyboard() {
   const categories = getCategories();

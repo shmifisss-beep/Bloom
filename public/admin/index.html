@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Bloom — Boshqaruv Paneli</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root {
+    --bg: #0C0C11;
+    --card: #16161d;
+    --border: rgba(255,255,255,0.1);
+    --text: #F5F5F7;
+    --text-dim: #9CA3AF;
+    --accent: #FF5A1F;
+    --accent2: #F59E0B;
+    --danger: #EF4444;
+    --success: #10B981;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #app { padding: 12px 14px 90px; max-width: 640px; margin: 0 auto; }
+
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 2px 16px;
+  }
+  .header h1 { font-size: 18px; font-weight: 800; margin: 0; }
+  .header .sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    border: none; border-radius: 12px; padding: 10px 16px;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    background: rgba(255,255,255,0.06); color: var(--text);
+    transition: transform .1s ease, opacity .15s ease;
+  }
+  .btn:active { transform: scale(0.96); }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+  .btn-danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .btn-block { width: 100%; padding: 14px; font-size: 15px; }
+  .btn:disabled { opacity: .5; pointer-events: none; }
+
+  .category-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; margin: 0 6px 8px 0; border-radius: 999px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    font-size: 13px; font-weight: 700; color: var(--text-dim);
+    cursor: pointer; white-space: nowrap;
+  }
+  .category-pill.active {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border-color: transparent;
+  }
+  .category-scroll {
+    display: flex; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .category-scroll::-webkit-scrollbar { display: none; }
+
+  .item-card {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 10px; margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .item-card img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; flex-shrink: 0; background: #222; }
+  .item-card .info { flex: 1; min-width: 0; }
+  .item-card .name { font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .item-card .price { font-size: 13px; color: var(--accent2); font-weight: 700; margin-top: 2px; }
+  .item-card .badge-star { color: #FBBF24; font-size: 11px; }
+
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .04em; color: var(--text-dim); margin-bottom: 6px;
+  }
+  .field input[type="text"], .field input[type="number"], .field textarea, .field select {
+    width: 100%; background: #000; border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px; color: var(--text); font-size: 14px; font-family: inherit;
+  }
+  .field textarea { min-height: 84px; resize: vertical; }
+  .field .hint { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+  .nutrition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .toggle-row {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 16px;
+  }
+  .switch {
+    position: relative; width: 44px; height: 26px; border-radius: 999px;
+    background: rgba(255,255,255,0.12); cursor: pointer; transition: background .2s;
+    flex-shrink: 0;
+  }
+  .switch.on { background: var(--accent); }
+  .switch .knob {
+    position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
+    border-radius: 50%; background: #fff; transition: transform .2s;
+  }
+  .switch.on .knob { transform: translateX(18px); }
+
+  .image-picker {
+    width: 100%; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden;
+    background: #000; border: 1px dashed var(--border);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; margin-bottom: 16px; cursor: pointer;
+  }
+  .image-picker img { width: 100%; height: 100%; object-fit: cover; }
+  .image-picker .placeholder { color: var(--text-dim); font-size: 13px; text-align: center; padding: 20px; }
+  .image-picker input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+  .topbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .topbar .back { font-size: 20px; cursor: pointer; padding: 4px 8px; }
+  .topbar .title { font-size: 16px; font-weight: 800; flex: 1; }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+
+  .loading { text-align: center; padding: 60px 20px; color: var(--text-dim); font-size: 14px; }
+
+  .fab {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    max-width: 640px; width: calc(100% - 28px);
+    z-index: 20;
+  }
+
+  .toast {
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+    background: var(--success); color: #fff; font-size: 13px; font-weight: 700;
+    padding: 10px 18px; border-radius: 999px; z-index: 50;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    opacity: 0; transition: opacity .2s;
+  }
+  .toast.show { opacity: 1; }
+  .toast.error { background: var(--danger); }
+
+  .action-row { display: flex; gap: 10px; margin-top: 20px; }
+</style>
+</head>
+<body>
+  <div id="app"><div class="loading">Yuklanmoqda...</div></div>
+  <div class="toast" id="toast"></div>
+
+<script>
+const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+if (tg) {
+  tg.ready();
+  tg.expand();
+  document.documentElement.style.setProperty('--bg', tg.themeParams.bg_color ? '#' + toHex(tg.themeParams.bg_color) : '#0C0C11');
+}
+function toHex(c) { return c.startsWith('#') ? c.slice(1) : c; }
+
+const initData = tg ? tg.initData : '';
+const API_BASE = ''; // same origin
+
+let state = {
+  view: 'list', // list | edit | add
+  categories: [],
+  activeCategory: null,
+  items: [],
+  editingItem: null,
+  saving: false
+};
+
+const CATEGORY_LABELS = {
+  burgers: '🍔 Burgerlar', lavash: '🌯 Lavash', donar: '🥙 Donar & Shaurma',
+  chicken: '🍗 Sochli Tovuq', hotdogs: '🌭 Xot-dog & Sendvich',
+  sides: '🍟 Kartoshka & Sous', drinks: '🥤 Ichimliklar', desserts: '🍫 Desertlar'
+};
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => { t.className = 'toast'; }, 2500);
+}
+
+async function apiFetch(path, options = {}) {
+  const res = await fetch(API_BASE + path, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'tma ' + initData,
+      ...(options.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || ('HTTP ' + res.status));
+  }
+  return res.json();
+}
+
+async function loadMenu() {
+  const items = await apiFetch('/api/admin/menu');
+  state.items = items;
+  const cats = [...new Set(items.map(i => i.category))];
+  state.categories = cats;
+  if (!state.activeCategory && cats.length) state.activeCategory = cats[0];
+}
+
+function render() {
+  const app = document.getElementById('app');
+  if (state.view === 'list') app.innerHTML = renderList();
+  else if (state.view === 'edit') app.innerHTML = renderEdit();
+  else if (state.view === 'add') app.innerHTML = renderAdd();
+  attachListeners();
+  setupMainButton();
+}
+
+function renderList() {
+  const catsHtml = state.categories.map(c => `
+    <div class="category-pill ${c === state.activeCategory ? 'active' : ''}" data-cat="${c}">
+      ${CATEGORY_LABELS[c] || c}
+    </div>
+  `).join('');
+
+  const filtered = state.items.filter(i => i.category === state.activeCategory);
+  const itemsHtml = filtered.length ? filtered.map(i => `
+    <div class="item-card" data-id="${i.id}">
+      <img src="${i.image || ''}" onerror="this.style.opacity=0" />
+      <div class="info">
+        <div class="name">${escapeHtml(i.name)}${i.featured ? ' <span class="badge-star">⭐</span>' : ''}</div>
+        <div class="price">${escapeHtml(i.priceDisplay || (i.price + ' so‘m'))}</div>
+      </div>
+    </div>
+  `).join('') : `<div class="empty-state"><div class="icon">🍽</div>Bu toifada hozircha taom yo‘q</div>`;
+
+  return `
+    <div class="header">
+      <div>
+        <h1>Boshqaruv Paneli</h1>
+        <div class="sub">${state.items.length} ta taom</div>
+      </div>
+    </div>
+    <div class="category-scroll">${catsHtml}</div>
+    <div id="itemsList">${itemsHtml}</div>
+    <div style="height: 70px;"></div>
+    <div class="fab">
+      <button class="btn btn-primary btn-block" id="addBtn">+ Yangi Taom Qo‘shish</button>
+    </div>
+  `;
+}
+
+function renderEdit() {
+  const it = state.editingItem;
+  const ingredientsText = (it.ingredients || []).join('\n');
+  const n = it.nutrition || {};
+  const catsOptions = Object.keys(CATEGORY_LABELS).map(c =>
+    `<option value="${c}" ${c === it.category ? 'selected' : ''}>${CATEGORY_LABELS[c]}</option>`
+  ).join('');
+
+  return `
+    <div class="topbar">
+      <div class="back" id="backBtn">←</div>
+      <div class="title">${escapeHtml(it.name)}</div>
+    </div>
+
+    <div class="image-picker" id="imagePicker">
+      ${it.image ? `<img src="${it.image}" id="previewImg" />` : `<div class="placeholder" id="previewImg">🖼<br/>Rasmni o‘zgartirish uchun bosing</div>`}
+      <input type="file" accept="image/png,image/jpeg,image/webp" id="imageInput" />
+    </div>
+
+    <div class="field">
+      <label>Nomi</label>
+      <input type="text" id="f_name" value="${escapeAttr(it.name)}" />
+    </div>
+
+    <div class="field">
+      <label>Toifa</label>
+      <select id="f_category">${catsOptions}</select>
+    </div>
+
+    <div class="field">
+      <label>Narxi (so‘m)</label>
+      <input type="number" id="f_price" value="${it.price}" />
+    </div>
+
+    <div class="field">
+      <label>Qisqacha Tavsif</label>
+      <input type="text" id="f_subtitle" value="${escapeAttr(it.subtitle || '')}" />
+    </div>
+
+    <div class="field">
+      <label>Tarkibi (har biri alohida qatorda)</label>
+      <textarea id="f_ingredients">${escapeHtml(ingredientsText)}</textarea>
+    </div>
+
+    <div class="field">
+      <label>Ozuqaviy Qiymati</label>
+      <div class="nutrition-grid">
+        <input type="text" id="f_calories" placeholder="Kaloriya (masalan 540 kkal)" value="${escapeAttr(it.calories || '')}" />
+        <input type="text" id="f_protein" placeholder="Oqsil (masalan 24g)" value="${escapeAttr(n.protein || '')}" />
+        <input type="text" id="f_carbs" placeholder="Uglevod (masalan 38g)" value="${escapeAttr(n.carbs || '')}" />
+        <input type="text" id="f_fat" placeholder="Yog‘ (masalan 26g)" value="${escapeAttr(n.fat || '')}" />
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <span>⭐ Saralanganlarga Qo‘shilgan</span>
+      <div class="switch ${it.featured ? 'on' : ''}" id="featuredSwitch"><div class="knob"></div></div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary btn-block" id="saveBtn">Saqlash</button>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-danger btn-block" id="deleteBtn">🗑 Taomni O‘chirish</button>
+    </div>
+    <div style="height: 30px;"></div>
+  `;
+}
+
+function renderAdd() {
+  const catsOptions = Object.keys(CATEGORY_LABELS).map(c =>
+    `<option value="${c}">${CATEGORY_LABELS[c]}</option>`
+  ).join('');
+
+  return `
+    <div class="topbar">
+      <div class="back" id="backBtn">←</div>
+      <div class="title">Yangi Taom Qo‘shish</div>
+    </div>
+
+    <div class="image-picker" id="imagePicker">
+      <div class="placeholder" id="previewImg">🖼<br/>Rasm tanlash uchun bosing</div>
+      <input type="file" accept="image/png,image/jpeg,image/webp" id="imageInput" />
+    </div>
+
+    <div class="field">
+      <label>Nomi</label>
+      <input type="text" id="f_name" placeholder="Masalan: Katta Burger" />
+    </div>
+
+    <div class="field">
+      <label>Toifa</label>
+      <select id="f_category">${catsOptions}</select>
+    </div>
+
+    <div class="field">
+      <label>Narxi (so‘m)</label>
+      <input type="number" id="f_price" placeholder="42000" />
+    </div>
+
+    <div class="field">
+      <label>Tarkibi (ixtiyoriy, har biri alohida qatorda)</label>
+      <textarea id="f_ingredients" placeholder="Mol go‘shti kotleti&#10;Yangi bulochka&#10;Maxsus sous"></textarea>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary btn-block" id="createBtn">Qo‘shish</button>
+    </div>
+    <div style="height: 30px;"></div>
+  `;
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function escapeAttr(s) { return escapeHtml(s).replace(/\n/g, ' '); }
+
+let pendingImageBase64 = null;
+
+function attachListeners() {
+  pendingImageBase64 = null;
+
+  if (state.view === 'list') {
+    document.querySelectorAll('.category-pill').forEach(el => {
+      el.onclick = () => { state.activeCategory = el.dataset.cat; render(); };
+    });
+    document.querySelectorAll('.item-card').forEach(el => {
+      el.onclick = () => {
+        const item = state.items.find(i => i.id === el.dataset.id);
+        state.editingItem = JSON.parse(JSON.stringify(item));
+        state.view = 'edit';
+        render();
+      };
+    });
+    const addBtn = document.getElementById('addBtn');
+    if (addBtn) addBtn.onclick = () => { state.view = 'add'; render(); };
+  }
+
+  if (state.view === 'edit' || state.view === 'add') {
+    const backBtn = document.getElementById('backBtn');
+    if (backBtn) backBtn.onclick = () => { state.view = 'list'; render(); };
+
+    const imageInput = document.getElementById('imageInput');
+    if (imageInput) {
+      imageInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          pendingImageBase64 = reader.result;
+          const preview = document.getElementById('previewImg');
+          if (preview) {
+            const img = document.createElement('img');
+            img.src = pendingImageBase64;
+            preview.replaceWith(img);
+            img.id = 'previewImg';
+          }
+        };
+        reader.readAsDataURL(file);
+      };
+    }
+
+    const featuredSwitch = document.getElementById('featuredSwitch');
+    if (featuredSwitch) {
+      featuredSwitch.onclick = () => {
+        state.editingItem.featured = !state.editingItem.featured;
+        featuredSwitch.classList.toggle('on', state.editingItem.featured);
+      };
+    }
+
+    const saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) saveBtn.onclick = handleSave;
+
+    const deleteBtn = document.getElementById('deleteBtn');
+    if (deleteBtn) deleteBtn.onclick = handleDelete;
+
+    const createBtn = document.getElementById('createBtn');
+    if (createBtn) createBtn.onclick = handleCreate;
+  }
+}
+
+function setupMainButton() {
+  if (!tg) return;
+  tg.MainButton.hide();
+}
+
+async function uploadPendingImageIfAny() {
+  if (!pendingImageBase64) return null;
+  const result = await apiFetch('/api/admin/upload-image', {
+    method: 'POST',
+    body: JSON.stringify({ imageBase64: pendingImageBase64 })
+  });
+  return result.url;
+}
+
+async function handleSave() {
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = 'Saqlanmoqda...';
+  try {
+    const imageUrl = await uploadPendingImageIfAny();
+    const ingredients = document.getElementById('f_ingredients').value
+      .split('\n').map(s => s.trim()).filter(Boolean);
+
+    const patch = {
+      name: document.getElementById('f_name').value.trim(),
+      category: document.getElementById('f_category').value,
+      price: Number(document.getElementById('f_price').value),
+      subtitle: document.getElementById('f_subtitle').value.trim(),
+      ingredients,
+      calories: document.getElementById('f_calories').value.trim() || '-',
+      nutrition: {
+        protein: document.getElementById('f_protein').value.trim() || '-',
+        carbs: document.getElementById('f_carbs').value.trim() || '-',
+        fat: document.getElementById('f_fat').value.trim() || '-',
+        sodium: (state.editingItem.nutrition && state.editingItem.nutrition.sodium) || '-'
+      },
+      featured: state.editingItem.featured
+    };
+    if (imageUrl) patch.image = imageUrl;
+
+    await apiFetch('/api/admin/menu/' + state.editingItem.id, {
+      method: 'PATCH',
+      body: JSON.stringify(patch)
+    });
+
+    showToast('✅ Saqlandi');
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    await loadMenu();
+    state.view = 'list';
+    render();
+  } catch (e) {
+    showToast('❌ ' + e.message, true);
+    btn.disabled = false;
+    btn.textContent = 'Saqlash';
+  }
+}
+
+async function handleDelete() {
+  if (!confirm('Ushbu taomni o‘chirishga aminmisiz?')) return;
+  const btn = document.getElementById('deleteBtn');
+  btn.disabled = true;
+  try {
+    await apiFetch('/api/admin/menu/' + state.editingItem.id, { method: 'DELETE' });
+    showToast('🗑 O‘chirildi');
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    await loadMenu();
+    state.view = 'list';
+    render();
+  } catch (e) {
+    showToast('❌ ' + e.message, true);
+    btn.disabled = false;
+  }
+}
+
+async function handleCreate() {
+  const btn = document.getElementById('createBtn');
+  const name = document.getElementById('f_name').value.trim();
+  const price = Number(document.getElementById('f_price').value);
+  if (!name || !price) {
+    showToast('⚠️ Nomi va narxini kiriting', true);
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Qo‘shilmoqda...';
+  try {
+    const imageUrl = await uploadPendingImageIfAny();
+    const ingredients = document.getElementById('f_ingredients').value
+      .split('\n').map(s => s.trim()).filter(Boolean);
+
+    const body = {
+      name,
+      category: document.getElementById('f_category').value,
+      price,
+      ingredients
+    };
+    if (imageUrl) body.image = imageUrl;
+
+    await apiFetch('/api/admin/menu', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+
+    showToast('✅ Qo‘shildi');
+    if (tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    await loadMenu();
+    state.view = 'list';
+    render();
+  } catch (e) {
+    showToast('❌ ' + e.message, true);
+    btn.disabled = false;
+    btn.textContent = 'Qo‘shish';
+  }
+}
+
+async function init() {
+  if (!initData) {
+    document.getElementById('app').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">🔒</div>
+        Bu panel faqat Telegram ilovasi ichida ishlaydi.<br/>
+        Botga /panel buyrug‘ini yuboring.
+      </div>`;
+    return;
+  }
+  try {
+    await apiFetch('/api/admin/me');
+  } catch (e) {
+    document.getElementById('app').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">⛔️</div>
+        Ruxsat yo‘q. Bu Telegram akkaunt administrator emas.
+      </div>`;
+    return;
+  }
+  try {
+    await loadMenu();
+    render();
+  } catch (e) {
+    document.getElementById('app').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">⚠️</div>
+        Menyuni yuklab bo‘lmadi: ${escapeHtml(e.message)}
+      </div>`;
+  }
+}
+
+init();
+</script>
+</body>
+</html>
