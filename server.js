@@ -158,7 +158,7 @@ app.post('/api/admin/menu', requireAdmin, (req, res) => {
     cookTime: '10 daq',
     calories: body.calories || '-',
     spiceLevel: body.spiceLevel || 0,
-    image: body.image || 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80',
+    image: body.image || '',
     featured: Boolean(body.featured),
     badge: body.badge || null,
     tags: Array.isArray(body.tags) ? body.tags : [],
@@ -719,9 +719,7 @@ bot.on('text', async (ctx) => {
 
   if (session.action === 'add_image') {
     const lower = text.toLowerCase();
-    session.draft.image = (lower === 'yo‘q' || lower === 'yoq')
-      ? 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80'
-      : text;
+    session.draft.image = (lower === 'yo‘q' || lower === 'yoq') ? '' : text;
     session.action = 'add_ingredients';
     sessions.set(chatId, session);
     return ctx.reply(

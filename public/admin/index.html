@@ -92,6 +92,16 @@
 
   .nutrition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
+  .quick-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .quick-chip {
+    padding: 7px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 700;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    color: var(--text); cursor: pointer; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .quick-chip:active { transform: scale(0.95); }
+  .quick-chip .plus { color: var(--accent2); font-weight: 800; }
+
   .toggle-row {
     display: flex; align-items: center; justify-content: space-between;
     background: var(--card); border: 1px solid var(--border); border-radius: 12px;
@@ -177,6 +187,8 @@ const CATEGORY_LABELS = {
   chicken: '🍗 Sochli Tovuq', hotdogs: '🌭 Xot-dog & Sendvich',
   sides: '🍟 Kartoshka & Sous', drinks: '🥤 Ichimliklar', desserts: '🍫 Desertlar'
 };
+
+const QUICK_INGREDIENTS = ['Mol Go‘shti', 'Tovuq Go‘shti', 'Achchiq'];
 
 function showToast(msg, isError) {
   const t = document.getElementById('toast');
@@ -293,6 +305,7 @@ function renderEdit() {
 
     <div class="field">
       <label>Tarkibi (har biri alohida qatorda)</label>
+      <div class="quick-chips" id="quickChips"></div>
       <textarea id="f_ingredients">${escapeHtml(ingredientsText)}</textarea>
     </div>
 
@@ -354,6 +367,7 @@ function renderAdd() {
 
     <div class="field">
       <label>Tarkibi (ixtiyoriy, har biri alohida qatorda)</label>
+      <div class="quick-chips" id="quickChips"></div>
       <textarea id="f_ingredients" placeholder="Mol go‘shti kotleti&#10;Yangi bulochka&#10;Maxsus sous"></textarea>
     </div>
 
@@ -393,6 +407,24 @@ function attachListeners() {
   if (state.view === 'edit' || state.view === 'add') {
     const backBtn = document.getElementById('backBtn');
     if (backBtn) backBtn.onclick = () => { state.view = 'list'; render(); };
+
+    const quickChips = document.getElementById('quickChips');
+    if (quickChips) {
+      quickChips.innerHTML = QUICK_INGREDIENTS.map(ing =>
+        `<div class="quick-chip" data-ing="${escapeAttr(ing)}"><span class="plus">+</span> ${escapeHtml(ing)}</div>`
+      ).join('');
+      quickChips.querySelectorAll('.quick-chip').forEach(chip => {
+        chip.onclick = () => {
+          const textarea = document.getElementById('f_ingredients');
+          const ing = chip.dataset.ing;
+          const lines = textarea.value.split('\n').map(s => s.trim()).filter(Boolean);
+          if (lines.includes(ing)) return; // avoid duplicates
+          lines.push(ing);
+          textarea.value = lines.join('\n');
+          if (tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+        };
+      });
+    }
 
     const imageInput = document.getElementById('imageInput');
     if (imageInput) {
